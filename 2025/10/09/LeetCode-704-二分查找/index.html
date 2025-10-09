@@ -14,21 +14,25 @@
   
 
   
-  <title>老猫识途</title>
+  <title>LeetCode-704-二分查找 | 老猫识途</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="Work It, Make It, Do It .">
-<meta property="og:type" content="website">
-<meta property="og:title" content="老猫识途">
-<meta property="og:url" content="https://saberanakin.github.io/index.html">
+  <meta name="description" content="题目描述给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果 target 存在返回下标，否则返回 -1 你必须编写一个具有 O(log n) 时间复杂度的算法。 示例1： 123输入: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9输出: 4解释: 9 出现在 nums 中并且下标为 4 示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-704-二分查找">
+<meta property="og:url" content="https://saberanakin.github.io/2025/10/09/LeetCode-704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/index.html">
 <meta property="og:site_name" content="老猫识途">
-<meta property="og:description" content="Work It, Make It, Do It .">
+<meta property="og:description" content="题目描述给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果 target 存在返回下标，否则返回 -1 你必须编写一个具有 O(log n) 时间复杂度的算法。 示例1： 123输入: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9输出: 4解释: 9 出现在 nums 中并且下标为 4 示">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-09T05:31:22.000Z">
+<meta property="article:modified_time" content="2025-10-09T07:24:34.128Z">
 <meta property="article:author" content="AnakinLu">
-<meta property="article:tag" content="cs,ai">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="二分查找">
+<meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="老猫识途" type="application/atom+xml">
@@ -53,14 +57,14 @@
   
   
     
-<div id="banner" class=" is_home ">
+<div id="banner" class="">
   <img src="/images/banner5.jpg" itemprop="image">
   <div id="banner-dim"></div>
 </div>
  
    
   <div id="main-grid" class="  ">
-    <div id="nav" class=" is_home "  >
+    <div id="nav" class=""  >
       <navbar id="navbar">
   <nav id="title-nav">
     <a href="/">
@@ -245,11 +249,12 @@
 </sidebar>
     </div>
     <div id="content-body">
-      
-   
+       
 
 
 <article id="post-LeetCode-704-二分查找" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
    
   <div class="article-inner">
     <div class="article-main">
@@ -259,8 +264,8 @@
   <div class="main-title-dot"></div>
   
     
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2025/10/09/LeetCode-704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">LeetCode-704-二分查找</a>
+      <h1 class="p-name article-title" itemprop="headline name">
+        LeetCode-704-二分查找
       </h1>
     
   
@@ -288,20 +293,91 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <div class="truncate-text">
-            
-              题目描述给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果 target 存在返回下标，否则返回 -1
-你必须编写一个具有 O(log n) 时间复杂度的算法。
-示例1：
-123输入: nums = [-1,0,3,5,9,12], target = 9输出: 4解释: 9 出现在 nums 中并且下标为 4
-示例2：
-123输入: nums = [-1,0,3,5,9,12], target = 9输出: 4解释: 9 出现在 nums 中并且下标为 4
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个 <code>n</code> 个元素有序的（升序）整型数组 <code>nums</code> 和一个目标值 <code>target</code>  ，写一个函数搜索 <code>nums</code> 中的 <code>target</code>，如果 <code>target</code> 存在返回下标，否则返回 -1</p>
+<p>你必须编写一个具有 <code>O(log n)</code> 时间复杂度的算法。</p>
+<p>示例1：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [-1,0,3,5,9,12], target = 9</span><br><span class="line">输出: 4</span><br><span class="line">解释: 9 出现在 nums 中并且下标为 4</span><br></pre></td></tr></table></figure>
+<p>示例2：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [-1,0,3,5,9,12], target = 9</span><br><span class="line">输出: 4</span><br><span class="line">解释: 9 出现在 nums 中并且下标为 4</span><br></pre></td></tr></table></figure>
 
-解题思路将该题简化，我们会发现以下几个关键词：有序数组、无重复元素、O(log n)，这是一道很典型的二分查找，借由该题，我们将详细叙述二分的思想。
-1. 二分查找的基本原理二分查找（Binary Search）是一种基于分治策略的查找算法，其核心思想是通过不断将有序数据集对半分割来快速定位目标元素。算法要求数据必须预先排序（通常为升序或降序），从而利用有序性快速缩小搜索范围。
-数学基础​​：对于一个长度为n的有序数组，二分查找最多需要⌊l...
-            
-          </div>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>将该题简化，我们会发现以下几个关键词：有序数组、无重复元素、O(log n)，这是一道很典型的<strong>二分查找</strong>，借由该题，我们将详细叙述二分的思想。</p>
+<h2 id="1-二分查找的基本原理"><a href="#1-二分查找的基本原理" class="headerlink" title="1. 二分查找的基本原理"></a>1. 二分查找的基本原理</h2><p>二分查找（Binary Search）是一种基于分治策略的查找算法，其核心思想是通过不断将有序数据集对半分割来快速定位目标元素<br>。算法要求数据必须预先排序（通常为升序或降序），从而利用有序性快速缩小搜索范围。</p>
+<p><strong>数学基础</strong>​​：对于一个长度为n的有序数组，二分查找最多需要⌊log₂n⌋+1次比较<br>。例如，当n&#x3D;1000时，最多只需10次比较即可完成查找，而线性查找可能需要1000次比较。这种指数级的效率提升使得二分查找在处理大规模数据时极具优势。</p>
+<p><strong>适用场景</strong>​​：</p>
+<ul>
+<li>数据结构支持随机访问（如数组、向量）</li>
+<li>数据必须有序（若无序需先排序）</li>
+<li>存在明确的判断条件（能确定目标在左半区还是右半区）</li>
+</ul>
+<h2 id="2-二分查找的两种主要实现方式"><a href="#2-二分查找的两种主要实现方式" class="headerlink" title="2. 二分查找的两种主要实现方式"></a>2. 二分查找的两种主要实现方式</h2><h3 id="2-1-左闭右闭区间-left-right"><a href="#2-1-左闭右闭区间-left-right" class="headerlink" title="2.1 左闭右闭区间 [left, right]"></a>2.1 左闭右闭区间 [left, right]</h3><p>这是最直观的实现方式，搜索区间包含左右边界指向的元素。</p>
+<p>​​<strong>算法流程​</strong>​：</p>
+<p>​1.​初始化边界​​：设置左边界left &#x3D; 0，右边界right &#x3D; nums.length - 1</p>
+<p>​2.​循环条件​​：当left ≤ right时继续查找（确保搜索区间有效），因为left &#x3D;&#x3D; right是有意义的</p>
+<p>​3. ​计算中间位置​​：mid &#x3D; left + ((right - left)&gt;&gt;1)（防止整数溢出的安全写法，还涉及到符号运算顺序级）</p>
+<p>​4.​比较与判断​​：</p>
+<ul>
+<li>如果arr[mid] &#x3D;&#x3D; target，查找成功，返回mid</li>
+<li>如果arr[mid] &lt; target，说明目标在右侧，更新left &#x3D; mid + 1 （此时mid值一定不是目标值，那么接下来要查找的左区间结束下标位置就是 middle + 1，遵循区间左闭右闭）</li>
+<li>如果arr[mid] &gt; target，说明目标在左侧，更新right &#x3D; mid - 1</li>
+</ul>
+<p>​​5.终止条件​​：如果循环结束仍未找到目标，返回-1表示查找失败</p>
+<p><strong>代码实现</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>); <span class="comment">// 防止溢出</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)</span><br><span class="line">                left =  mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-2-左闭右开区间-left-right"><a href="#2-2-左闭右开区间-left-right" class="headerlink" title="2.2 左闭右开区间 [left, right)"></a>2.2 左闭右开区间 [left, right)</h3><p>这种实现方式中，搜索区间包含左边界指向的元素，但不包含右边界指向的元素。</p>
+<p><strong>​​算法流程​​</strong>:</p>
+<p>1.​初始化边界​​：设置left &#x3D; 0，right &#x3D; nums.length（右边界不包含）</p>
+<p>2.循环条件​​：当left &lt; right时继续查找（这里使用 &lt; ,因为left &#x3D;&#x3D; right在区间[left, right)是没有意义的）</p>
+<p>3.​​计算中间位置</p>
+<p>4.​比较与判断​​：</p>
+<ul>
+<li>如果arr[mid] &#x3D;&#x3D; target，查找成功，返回mid</li>
+<li>如果arr[mid] &lt; target，更新left &#x3D; mid + 1</li>
+<li>如果arr[mid] &gt; target，更新right &#x3D; mid（注意不是mid-1），因为当前arr[mid]不等于target，去左区间继续寻找，而寻找区间是左闭右开区间，所以right更新为mid，即：下一个查询区间不会去比较arr[mid]</li>
+</ul>
+<p>5.终止条件​​：循环结束时仍未找到目标，返回-1</p>
+<p><strong>​​代码实现</strong>​​：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> [] nums, <span class="type">int</span> target)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="comment">//有问题 int right = nums.length - 1; </span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right  - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-两种实现方法对比"><a href="#2-3-两种实现方法对比" class="headerlink" title="2.3 两种实现方法对比"></a>2.3 两种实现方法对比</h3><table>
+<thead>
+<tr>
+<th align="left">特性</th>
+<th align="left">左闭右闭区间 <code>[left, right]</code></th>
+<th align="left">左闭右开区间 <code>[left, right)</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>初始右边界</strong></td>
+<td align="left"><code>right = nums.length - 1</code></td>
+<td align="left"><code>right = nums.length</code></td>
+</tr>
+<tr>
+<td align="left"><strong>循环条件</strong></td>
+<td align="left"><code>while (left &lt;= right)</code></td>
+<td align="left"><code>while (left &lt; right)</code></td>
+</tr>
+<tr>
+<td align="left"><strong>边界更新 (<code>nums[mid] &gt; target</code>)</strong></td>
+<td align="left"><code>right = mid - 1</code></td>
+<td align="left"><code>right = mid</code></td>
+</tr>
+<tr>
+<td align="left"><strong>区间为空的条件</strong></td>
+<td align="left"><code>left &gt; right</code></td>
+<td align="left"><code>left == right</code></td>
+</tr>
+<tr>
+<td align="left"><strong>mid 计算偏好（防死循环）</strong></td>
+<td align="left"><code>mid = left + (right - left) / 2</code> 或 <code>mid = left + (right - left + 1) / 2</code> 均可</td>
+<td align="left">必须使用 <code>mid = left + (right - left) / 2</code>（偏左）</td>
+</tr>
+</tbody></table>
+<h2 id="3-关键点总结"><a href="#3-关键点总结" class="headerlink" title="3. 关键点总结"></a>3. 关键点总结</h2><h3 id="3-1-防止整数溢出"><a href="#3-1-防止整数溢出" class="headerlink" title="3.1 防止整数溢出"></a>3.1 防止整数溢出</h3><p>计算中间位置时，应使用left + (right - left) &#x2F; 2而非(left + right) &#x2F; 2，这样可以避免当left和right都很大时相加导致的整数溢出。</p>
+<h3 id="3-2-循环条件的选择"><a href="#3-2-循环条件的选择" class="headerlink" title="3.2 循环条件的选择"></a>3.2 循环条件的选择</h3><p>循环条件必须与区间定义保持一致。左闭右闭区间使用left &lt;&#x3D; right，因为当left等于right时区间仍包含一个元素；左闭右开区间使用left &lt; right，因为当left等于right时区间为空。</p>
+<h3 id="3-3-边界更新的逻辑"><a href="#3-3-边界更新的逻辑" class="headerlink" title="3.3 边界更新的逻辑"></a>3.3 边界更新的逻辑</h3><p>边界更新必须确保每次迭代都能缩小搜索范围，同时不遗漏可能的目标元素。特别是在左闭右开区间中，当目标值小于中间值时，右边界更新为mid而非mid-1，因为右边界本身不指向待检查元素。</p>
+
         
       </div>
 
@@ -309,265 +385,35 @@
     </div>
     
      
-    <a class="right-panel  non-pic  "
-      
-      href="/2025/10/09/LeetCode-704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
   </div>
   
-</article>
-
-
-
-
-
-
-
-   
-
-
-<article id="post-Markdown语法完全指南" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
     
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2025/05/24/Markdown%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">Markdown语法指南</a>
-      </h1>
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
     
-  
-</div>
+      href="/2025/05/24/Markdown%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/"
+      title="Markdown语法指南"
+     >
 
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2025-05-24T02:00:00.000Z" itemprop="datePublished">2025-05-24</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            768 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%99%E4%BD%9C/" rel="tag">写作</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              Markdown语法完全指南Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。本文将详细介绍 Markdown 的常用语法，帮助您快速掌握这个强大的写作工具。
-1. 标题使用 # 符号来创建标题，# 的数量表示标题的级别：
-123456# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题
-
-2. 文本格式2.1 强调12345*斜体文本*_斜体文本_**粗体文本**__粗体文本__***粗斜体文本***
-
-2.2 删除线1~~删除线文本~~
-
-3. 列表3.1 无序列表1234- 项目1- 项目2  - 子项目2.1  - 子项目2.2
-
-3.2 有序列表1231. 第一项2. 第二项3. 第三项
-
-4. 链接和图片4.1 链接1[链接文字](URL)
-
-4.2 图片1![图片描述](图片URL)
-
-5. 代码5.1 行内代码1`行内代码`
-
-5.2 代码块123```语言名称代码块内容```
-
-6. 引用12345&gt; 引用文本&gt; &gt; 多行引用&gt; &gt; &gt; 嵌套引...
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
+    <p class="title-text">
       
-      href="/2025/05/24/Markdown%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
+        Markdown语法指南
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
   
 </article>
-
-
-
-
-
-
-
-   
-
-
-<article id="post-This-is-a-test" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2025/05/22/This-is-a-test/">This is a test</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2025-05-22T08:59:38.000Z" itemprop="datePublished">2025-05-22</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    Uncategorized 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            608 words 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <h1 id="第一章-猴王现世"><a href="#第一章-猴王现世" class="headerlink" title="第一章 猴王现世"></a>第一章 猴王现世</h1><p>传说在五百年前，在斯塔卡纳大陆的某一角落有一座灵山，山上有一座庙，庙里有一尊是石像，一尊猴子的石像，谁也不知道它是什么时候在那里，何人建造。<br>直到五百年后，有一个人造访灵山，会发生什么呢？</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2025/05/22/This-is-a-test/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-   
-
-
-<article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2025/05/22/hello-world/">Hello World</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2025-05-22T01:14:59.782Z" itemprop="datePublished">2025-05-22</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    Uncategorized 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            367 words 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
-
-More info: Writing
-Run server1$ hexo server
-
-More info: Server
-Generate static files1$ hexo generate
-
-More info: Generating
-Deploy to remote sites1$ hexo deploy
-
-More info: Deployment
-
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2025/05/22/hello-world/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
 
 
 
