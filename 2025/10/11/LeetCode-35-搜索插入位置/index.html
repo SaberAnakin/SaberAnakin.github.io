@@ -14,25 +14,28 @@
   
 
   
-  <title>LeetCode-704-二分查找 | 老猫识途</title>
+  <title>LeetCode-35-搜索插入位置 | 老猫识途</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="题目描述给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果 target 存在返回下标，否则返回 -1 你必须编写一个具有 O(log n) 时间复杂度的算法。 示例1： 123输入: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9输出: 4解释: 9 出现在 nums 中并且下标为 4 示">
+  <meta name="description" content="深入剖析LeetCode 35题，帮助读者全面掌握二分搜索技巧。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-704-二分查找">
-<meta property="og:url" content="https://saberanakin.github.io/2025/10/09/LeetCode-704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/index.html">
+<meta property="og:title" content="LeetCode-35-搜索插入位置">
+<meta property="og:url" content="https://saberanakin.github.io/2025/10/11/LeetCode-35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="老猫识途">
-<meta property="og:description" content="题目描述给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果 target 存在返回下标，否则返回 -1 你必须编写一个具有 O(log n) 时间复杂度的算法。 示例1： 123输入: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9输出: 4解释: 9 出现在 nums 中并且下标为 4 示">
+<meta property="og:description" content="深入剖析LeetCode 35题，帮助读者全面掌握二分搜索技巧。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-09T05:31:22.000Z">
-<meta property="article:modified_time" content="2025-10-09T07:24:34.128Z">
+<meta property="article:published_time" content="2025-10-11T03:39:56.000Z">
+<meta property="article:modified_time" content="2025-10-11T04:23:45.453Z">
 <meta property="article:author" content="AnakinLu">
 <meta property="article:tag" content="LeetCode">
 <meta property="article:tag" content="二分查找">
 <meta property="article:tag" content="数组">
+<meta property="article:tag" content="Easy">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Hot100">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="老猫识途" type="application/atom+xml">
@@ -263,7 +266,7 @@
        
 
 
-<article id="post-LeetCode-704-二分查找" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-LeetCode-35-搜索插入位置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -276,7 +279,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        LeetCode-704-二分查找
+        LeetCode-35-搜索插入位置
       </h1>
     
   
@@ -284,110 +287,90 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2025-10-09T05:31:22.000Z" itemprop="datePublished">2025-10-09</time>
+  <time class="dt-published" datetime="2025-10-11T03:39:56.000Z" itemprop="datePublished">2025-10-11</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">算法刷题</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">LeetCode</a>
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">算法刷题</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">LeetCode</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/Hot100/">Hot100</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.8k words 
+            2.5k words 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hot100/" rel="tag">Hot100</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个 <code>n</code> 个元素有序的（升序）整型数组 <code>nums</code> 和一个目标值 <code>target</code>  ，写一个函数搜索 <code>nums</code> 中的 <code>target</code>，如果 <code>target</code> 存在返回下标，否则返回 -1</p>
-<p>你必须编写一个具有 <code>O(log n)</code> 时间复杂度的算法。</p>
-<p>示例1：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [-1,0,3,5,9,12], target = 9</span><br><span class="line">输出: 4</span><br><span class="line">解释: 9 出现在 nums 中并且下标为 4</span><br></pre></td></tr></table></figure>
-<p>示例2：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [-1,0,3,5,9,12], target = 9</span><br><span class="line">输出: 4</span><br><span class="line">解释: 9 出现在 nums 中并且下标为 4</span><br></pre></td></tr></table></figure>
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>请必须使用时间复杂度为 $O(log n)$ 的算法。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,3,5,6], target = 5</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
 
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>将该题简化，我们会发现以下几个关键词：有序数组、无重复元素、O(log n)，这是一道很典型的<strong>二分查找</strong>，借由该题，我们将详细叙述二分的思想。</p>
-<h2 id="1-二分查找的基本原理"><a href="#1-二分查找的基本原理" class="headerlink" title="1. 二分查找的基本原理"></a>1. 二分查找的基本原理</h2><p>二分查找（Binary Search）是一种基于分治策略的查找算法，其核心思想是通过不断将有序数据集对半分割来快速定位目标元素<br>。算法要求数据必须预先排序（通常为升序或降序），从而利用有序性快速缩小搜索范围。</p>
-<p><strong>数学基础</strong>​​：对于一个长度为n的有序数组，二分查找最多需要⌊log₂n⌋+1次比较<br>。例如，当n&#x3D;1000时，最多只需10次比较即可完成查找，而线性查找可能需要1000次比较。这种指数级的效率提升使得二分查找在处理大规模数据时极具优势。</p>
-<p><strong>适用场景</strong>​​：</p>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,3,5,6], target = 2</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,3,5,6], target = 7</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示:</strong></p>
 <ul>
-<li>数据结构支持随机访问（如数组、向量）</li>
-<li>数据必须有序（若无序需先排序）</li>
-<li>存在明确的判断条件（能确定目标在左半区还是右半区）</li>
+<li>$1 &lt;&#x3D; nums.length &lt;&#x3D; 10^4$</li>
+<li>$-10^4 &lt;&#x3D; nums[i] &lt;&#x3D; 10^4$</li>
+<li>nums 为 <strong>无重复元素</strong> 的 <strong>升序</strong> 排列数组</li>
+<li>$-10^4 &lt;&#x3D; target &lt;&#x3D; 10^4$</li>
 </ul>
-<h2 id="2-二分查找的两种主要实现方式"><a href="#2-二分查找的两种主要实现方式" class="headerlink" title="2. 二分查找的两种主要实现方式"></a>2. 二分查找的两种主要实现方式</h2><h3 id="2-1-左闭右闭区间-left-right"><a href="#2-1-左闭右闭区间-left-right" class="headerlink" title="2.1 左闭右闭区间 [left, right]"></a>2.1 左闭右闭区间 [left, right]</h3><p>这是最直观的实现方式，搜索区间包含左右边界指向的元素。</p>
-<p>​​<strong>算法流程​</strong>​：</p>
-<p>​1.​初始化边界​​：设置左边界left &#x3D; 0，右边界right &#x3D; nums.length - 1</p>
-<p>​2.​循环条件​​：当left ≤ right时继续查找（确保搜索区间有效），因为left &#x3D;&#x3D; right是有意义的</p>
-<p>​3. ​计算中间位置​​：mid &#x3D; left + ((right - left)&gt;&gt;1)（防止整数溢出的安全写法，还涉及到符号运算顺序级）</p>
-<p>​4.​比较与判断​​：</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这道题要求我们在排序数组中找到目标值的位置，如果目标值不存在，则返回它应该被插入的位置。由于题目要求算法时间复杂度为 <code>O(log n)</code>，很明显需要使用二分搜索。</p>
+<p>对于此类问题，我们需要找到<strong>第一个大于等于目标值</strong>的元素索引，这正是二分搜索的一个常见应用场景，<br>但这一题容易模糊不清的就是对边界条件的处理。<br>要在数组中插入目标值，一共有四种情况：</p>
 <ul>
-<li>如果arr[mid] &#x3D;&#x3D; target，查找成功，返回mid</li>
-<li>如果arr[mid] &lt; target，说明目标在右侧，更新left &#x3D; mid + 1 （此时mid值一定不是目标值，那么接下来要查找的左区间结束下标位置就是 middle + 1，遵循区间左闭右闭）</li>
-<li>如果arr[mid] &gt; target，说明目标在左侧，更新right &#x3D; mid - 1</li>
+<li>目标值在数组所有元素之前</li>
+<li>目标值是数组中的某一个元素</li>
+<li>目标值插入数组中的某一个位置</li>
+<li>目标值在数组所有元素之后</li>
 </ul>
-<p>​​5.终止条件​​：如果循环结束仍未找到目标，返回-1表示查找失败</p>
-<p><strong>代码实现</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>); <span class="comment">// 防止溢出</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)</span><br><span class="line">                left =  mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-2-左闭右开区间-left-right"><a href="#2-2-左闭右开区间-left-right" class="headerlink" title="2.2 左闭右开区间 [left, right)"></a>2.2 左闭右开区间 [left, right)</h3><p>这种实现方式中，搜索区间包含左边界指向的元素，但不包含右边界指向的元素。</p>
-<p><strong>​​算法流程​​</strong>:</p>
-<p>1.​初始化边界​​：设置left &#x3D; 0，right &#x3D; nums.length（右边界不包含）</p>
-<p>2.循环条件​​：当left &lt; right时继续查找（这里使用 &lt; ,因为left &#x3D;&#x3D; right在区间[left, right)是没有意义的）</p>
-<p>3.​​计算中间位置</p>
-<p>4.​比较与判断​​：</p>
+<p>因此我们可以从暴力搜索和二分查找两个角度来解答该问题。</p>
+<h3 id="二分搜索基本原理"><a href="#二分搜索基本原理" class="headerlink" title="二分搜索基本原理"></a>二分搜索基本原理</h3><p>二分搜索的基本思想是将查找范围逐步缩小为原来的一半，直到找到目标元素或确定目标元素不存在。具体步骤如下(左闭右闭区间解法)：</p>
+<ol>
+<li>设置左边界 <code>left = 0</code> 和右边界 <code>right = n - 1</code></li>
+<li>当 <code>left &lt;= right</code> 时，计算中间位置 <code>mid = left + (right - left) / 2</code></li>
+<li>如果 <code>nums[mid] == target</code>，返回 <code>mid</code></li>
+<li>如果 <code>nums[mid] &lt; target</code>，说明目标在右半部分，设置 <code>left = mid + 1</code></li>
+<li>如果 <code>nums[mid] &gt; target</code>，说明目标在左半部分，设置 <code>right = mid - 1</code></li>
+<li>如果循环结束后仍未找到目标，那么 <code>right + 1</code> 就是目标值应该插入的位置</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="暴力搜索"><a href="#暴力搜索" class="headerlink" title="暴力搜索"></a>暴力搜索</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i ++)&#123;</span><br><span class="line">            <span class="comment">// 待查元素在数组前，中，待插；</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt;= target)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">         <span class="comment">// 目标值在数组所有元素之后的情况</span></span><br><span class="line">        <span class="keyword">return</span> nums.length;</span><br></pre></td></tr></table></figure>
+<p>这个方法非常简洁，时间复杂度为<code>O(n)</code>,空间复杂度为<code>O(1)</code>，关键在于如何把前三种情况的判断条件写出来。</p>
+<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><h4 id="闭区间写法"><a href="#闭区间写法" class="headerlink" title="闭区间写法"></a>闭区间写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>[]nums, <span class="type">int</span> target)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = n - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> mid;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            mid = left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二分查找结束条件是<code>left &gt; right</code>，也就是说，无论有没有查询到，结束的时候，right一定在left的左边，此时，如果查询到了，则直接返回mid，没有查询到，则待插位置在<code>right + 1</code>。</p>
+<h4 id="左闭右开区间写法"><a href="#左闭右开区间写法" class="headerlink" title="左闭右开区间写法"></a>左闭右开区间写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>[]nums, <span class="type">int</span> target)</span>&#123;</span><br><span class="line">        <span class="type">int</span> mid;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = nums.length;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">            mid = left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">                right = mid;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该写法除了right初始值，更新值需要改变之外，在最后return的时候，也是直接return right。<br>两种解法的最后return也可以统一写成return left，此时不需要考虑要不要加1的情况。left最终的位置一定是待插位置或者是待查位置。</p>
+<h2 id="注意事项和常见错误"><a href="#注意事项和常见错误" class="headerlink" title="注意事项和常见错误"></a>注意事项和常见错误</h2><p>使用二分搜索时，有几个常见的注意事项和潜在错误：</p>
+<ol>
+<li><p><strong>整数溢出</strong>：计算中间索引时，应使用 <code>mid := left + (right-left)/2</code> 而不是 <code>mid := (left+right)/2</code>，后者在大数据范围时可能导致整数溢出。</p>
+</li>
+<li><p><strong>循环条件</strong>：根据需要选择 <code>left &lt;= right</code> 或 <code>left &lt; right</code>。前者在循环结束时有 <code>left = right + 1</code>，后者在循环结束时有 <code>left = right</code>。</p>
+</li>
+<li><p><strong>边界更新</strong>：根据不同的搜索需求，边界更新方式也不同。例如，查找第一个满足条件的元素时，可能需要 <code>right = mid</code>，而不是 <code>right = mid - 1</code>。</p>
+</li>
+</ol>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>对于二分搜索：</p>
 <ul>
-<li>如果arr[mid] &#x3D;&#x3D; target，查找成功，返回mid</li>
-<li>如果arr[mid] &lt; target，更新left &#x3D; mid + 1</li>
-<li>如果arr[mid] &gt; target，更新right &#x3D; mid（注意不是mid-1），因为当前arr[mid]不等于target，去左区间继续寻找，而寻找区间是左闭右开区间，所以right更新为mid，即：下一个查询区间不会去比较arr[mid]</li>
+<li>时间复杂度：$O(\log n)$，其中 $n$ 是数组的长度。每次操作都会将搜索范围缩小为原来的一半。</li>
+<li>空间复杂度：$O(1)$，只使用了常数额外空间。</li>
 </ul>
-<p>5.终止条件​​：循环结束时仍未找到目标，返回-1</p>
-<p><strong>​​代码实现</strong>​​：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> [] nums, <span class="type">int</span> target)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="comment">//有问题 int right = nums.length - 1; </span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right  - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3-两种实现方法对比"><a href="#2-3-两种实现方法对比" class="headerlink" title="2.3 两种实现方法对比"></a>2.3 两种实现方法对比</h3><table>
-<thead>
-<tr>
-<th align="left">特性</th>
-<th align="left">左闭右闭区间 <code>[left, right]</code></th>
-<th align="left">左闭右开区间 <code>[left, right)</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>初始右边界</strong></td>
-<td align="left"><code>right = nums.length - 1</code></td>
-<td align="left"><code>right = nums.length</code></td>
-</tr>
-<tr>
-<td align="left"><strong>循环条件</strong></td>
-<td align="left"><code>while (left &lt;= right)</code></td>
-<td align="left"><code>while (left &lt; right)</code></td>
-</tr>
-<tr>
-<td align="left"><strong>边界更新 (<code>nums[mid] &gt; target</code>)</strong></td>
-<td align="left"><code>right = mid - 1</code></td>
-<td align="left"><code>right = mid</code></td>
-</tr>
-<tr>
-<td align="left"><strong>区间为空的条件</strong></td>
-<td align="left"><code>left &gt; right</code></td>
-<td align="left"><code>left == right</code></td>
-</tr>
-<tr>
-<td align="left"><strong>mid 计算偏好（防死循环）</strong></td>
-<td align="left"><code>mid = left + (right - left) / 2</code> 或 <code>mid = left + (right - left + 1) / 2</code> 均可</td>
-<td align="left">必须使用 <code>mid = left + (right - left) / 2</code>（偏左）</td>
-</tr>
-</tbody></table>
-<h2 id="3-关键点总结"><a href="#3-关键点总结" class="headerlink" title="3. 关键点总结"></a>3. 关键点总结</h2><h3 id="3-1-防止整数溢出"><a href="#3-1-防止整数溢出" class="headerlink" title="3.1 防止整数溢出"></a>3.1 防止整数溢出</h3><p>计算中间位置时，应使用left + (right - left) &#x2F; 2而非(left + right) &#x2F; 2，这样可以避免当left和right都很大时相加导致的整数溢出。</p>
-<h3 id="3-2-循环条件的选择"><a href="#3-2-循环条件的选择" class="headerlink" title="3.2 循环条件的选择"></a>3.2 循环条件的选择</h3><p>循环条件必须与区间定义保持一致。左闭右闭区间使用left &lt;&#x3D; right，因为当left等于right时区间仍包含一个元素；左闭右开区间使用left &lt; right，因为当left等于right时区间为空。</p>
-<h3 id="3-3-边界更新的逻辑"><a href="#3-3-边界更新的逻辑" class="headerlink" title="3.3 边界更新的逻辑"></a>3.3 边界更新的逻辑</h3><p>边界更新必须确保每次迭代都能缩小搜索范围，同时不遗漏可能的目标元素。特别是在左闭右开区间中，当目标值小于中间值时，右边界更新为mid而非mid-1，因为右边界本身不指向待检查元素。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>关键收获：</strong></p>
+<ol>
+<li>掌握 <code>sort.Search</code> 及其变体函数的用法和特性</li>
+<li>了解五种常见的二分搜索变体及其适用场景</li>
+<li>学会处理二分搜索中的边界条件和常见错误</li>
+<li>掌握在实际编程中应用二分搜索的技巧</li>
+</ol>
+<p>二分搜索不仅限于在数组中查找元素，还可以用于各种需要在有序空间中高效查找的场景，如二分答案、查找边界等。而且只要能找到一个判断条件把数组分割成两部分，我们都可以使用二分查找。灵活运用这种算法技术，将大大提高我们解决问题的效率。 </p>
 
         
       </div>
@@ -400,27 +383,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2025/10/11/LeetCode-35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/"
-      title="LeetCode-35-搜索插入位置"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        LeetCode-35-搜索插入位置
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2025/05/24/Markdown%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/"
-      title="Markdown语法指南"
+      href="/2025/10/09/LeetCode-704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"
+      title="LeetCode-704-二分查找"
      >
 
     <p class="title-text">
       
-        Markdown语法指南
+        LeetCode-704-二分查找
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
