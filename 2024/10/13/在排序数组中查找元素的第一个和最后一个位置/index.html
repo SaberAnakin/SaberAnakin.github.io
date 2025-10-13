@@ -23,15 +23,15 @@
   <meta name="description" content="本文深入剖析 LeetCode 第 34 题，不仅提供 O(log n) 的二分搜索解法，更详细阐述其核心设计思想，包括为何选择两次二分搜索、循环不变量（loop invariant）的原理以及边界指针的精确收敛过程，助你真正掌握二分搜索的精髓。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置">
-<meta property="og:url" content="https://saberanakin.github.io/2024/03/21/%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/index.html">
+<meta property="og:url" content="https://saberanakin.github.io/2024/10/13/%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="老猫识途">
 <meta property="og:description" content="本文深入剖析 LeetCode 第 34 题，不仅提供 O(log n) 的二分搜索解法，更详细阐述其核心设计思想，包括为何选择两次二分搜索、循环不变量（loop invariant）的原理以及边界指针的精确收敛过程，助你真正掌握二分搜索的精髓。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-21T07:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-13T03:16:26.639Z">
+<meta property="article:published_time" content="2024-10-13T11:20:00.000Z">
+<meta property="article:modified_time" content="2025-10-13T03:24:15.659Z">
 <meta property="article:author" content="AnakinLu">
-<meta property="article:tag" content="数组">
 <meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="数组">
 <meta property="article:tag" content="二分搜索">
 <meta property="article:tag" content="Medium">
 <meta property="article:tag" content="面试经典150">
@@ -258,8 +258,8 @@
           <div class="archive-count">3 </div>
         </a>
       
-        <a class="archive-link" href="/archives/2024/03 ">
-          March 2024 
+        <a class="archive-link" href="/archives/2024/10 ">
+          October 2024 
           <div class="archive-count">1 </div>
         </a>
       
@@ -296,7 +296,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-21T07:30:00.000Z" itemprop="datePublished">2024-03-21</time>
+  <time class="dt-published" datetime="2024-10-13T11:20:00.000Z" itemprop="datePublished">2024-10-13</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
