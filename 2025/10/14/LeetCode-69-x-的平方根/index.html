@@ -14,28 +14,27 @@
   
 
   
-  <title>LeetCode-35-搜索插入位置 | 老猫识途</title>
+  <title>LeetCode-69-x 的平方根 | 老猫识途</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="深入剖析LeetCode 35题，帮助读者全面掌握二分搜索技巧。">
+  <meta name="description" content="不使用库函数求非负整数 x 的算术平方根，返回向下取整值。给出二分查找与牛顿法两种实现，分析正确性、边界处理与溢出问题，并比较两种方法的优劣与适用场景。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-35-搜索插入位置">
-<meta property="og:url" content="https://saberanakin.github.io/2025/10/11/LeetCode-35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="LeetCode-69-x 的平方根">
+<meta property="og:url" content="https://saberanakin.github.io/2025/10/14/LeetCode-69-x-%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/index.html">
 <meta property="og:site_name" content="老猫识途">
-<meta property="og:description" content="深入剖析LeetCode 35题，帮助读者全面掌握二分搜索技巧。">
+<meta property="og:description" content="不使用库函数求非负整数 x 的算术平方根，返回向下取整值。给出二分查找与牛顿法两种实现，分析正确性、边界处理与溢出问题，并比较两种方法的优劣与适用场景。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-11T03:39:56.000Z">
-<meta property="article:modified_time" content="2025-10-11T04:23:45.453Z">
+<meta property="article:published_time" content="2025-10-14T06:05:00.000Z">
+<meta property="article:modified_time" content="2025-10-14T13:36:11.365Z">
 <meta property="article:author" content="AnakinLu">
 <meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="面试经典150">
 <meta property="article:tag" content="二分查找">
+<meta property="article:tag" content="数学">
 <meta property="article:tag" content="Easy">
-<meta property="article:tag" content="数组">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="Hot100">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="老猫识途" type="application/atom+xml">
@@ -271,7 +270,7 @@
        
 
 
-<article id="post-LeetCode-35-搜索插入位置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-LeetCode-69-x-的平方根" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -284,7 +283,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        LeetCode-35-搜索插入位置
+        LeetCode-69-x 的平方根
       </h1>
     
   
@@ -292,90 +291,119 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2025-10-11T03:39:56.000Z" itemprop="datePublished">2025-10-11</time>
+  <time class="dt-published" datetime="2025-10-14T06:05:00.000Z" itemprop="datePublished">2025-10-14</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">算法刷题</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">LeetCode</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/Hot100/">Hot100</a>
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">算法刷题</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">LeetCode</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/">面试经典150</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.5k words 
+            2.6k words 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hot100/" rel="tag">Hot100</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
-<p>请必须使用时间复杂度为 $O(log n)$ 的算法。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,3,5,6], target = 5</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个非负整数 <code>x</code>，计算并返回 <code>x</code> 的算术平方根。由于返回类型是整数，结果只保留整数部分，小数部分将被舍去。不得使用任何内置指数函数和算符，例如 <code>pow(x, 0.5)</code> 或 <code>x ** 0.5</code>。</p>
+<p>示例 1：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 4</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
 
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,3,5,6], target = 2</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 8</span><br><span class="line">输出：2</span><br><span class="line">解释：8 的算术平方根是 2.82842...，由于返回类型是整数，小数部分将被舍去。</span><br></pre></td></tr></table></figure>
 
-<p><strong>示例 3:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,3,5,6], target = 7</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
+<p>约束：<code>0 &lt;= x &lt;= 2^31 - 1</code></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><strong>关键洞见</strong>：若记答案为 <code>r = ⌊√x⌋</code>，则有 <code>r^2 &lt;= x &lt; (r+1)^2</code>。因此可以在整数域上使用单调性判定。</li>
+<li><strong>方法一（二分查找，详解）</strong>：利用单调性在整数区间上二分定位最大 <code>r</code> 使得 <code>r^2 &lt;= x</code>。</li>
+<li><strong>方法二（牛顿迭代）</strong>：迭代公式 <code>r_&#123;k+1&#125; = (r_k + x / r_k) / 2</code> 收敛很快，取整数部分即可。</li>
+</ul>
+<h2 id="二分法详解（不变量、边界与正确性）"><a href="#二分法详解（不变量、边界与正确性）" class="headerlink" title="二分法详解（不变量、边界与正确性）"></a>二分法详解（不变量、边界与正确性）</h2><ol>
+<li><strong>区间定义</strong>：使用左闭右闭区间 <code>[left, right]</code>，含义为“答案 <code>r</code> 一定在该区间内”。</li>
+<li><strong>初始化</strong>：<code>left = 0</code>，<code>right = x</code>（也可用更紧上界 <code>x / 2 + 1</code>，当 <code>x &gt;= 2</code> 时必成立）。</li>
+<li><strong>不变量</strong>：每轮迭代后，<code>r</code> 仍在 <code>[left, right]</code>，且区间严格收缩。</li>
+<li><strong>中点计算</strong>：<code>mid = left + ((right - left) &gt;&gt; 1)</code>，避免 <code>left + right</code> 直接相加导致溢出。</li>
+<li><strong>比较与缩小区间</strong>：<ul>
+<li>若 <code>(long)mid * mid &lt; x</code>，说明 <code>mid</code> 偏小，目标在右侧，更新 <code>left = mid + 1</code>。</li>
+<li>若 <code>(long)mid * mid &gt; x</code>，说明 <code>mid</code> 偏大，目标在左侧，更新 <code>right = mid - 1</code>。</li>
+<li>若相等，直接返回 <code>mid</code>。</li>
+</ul>
+</li>
+<li><strong>终止与返回</strong>：循环以 <code>left &gt; right</code> 终止，此时必有 <code>right^2 &lt;= x &lt; left^2</code>，因此返回 <code>right</code> 即为 <code>⌊√x⌋</code>。</li>
+<li><strong>溢出处理</strong>：比较平方前将 <code>mid</code> 提升为 <code>long</code> 再相乘，避免 <code>int</code> 乘法溢出导致的错误判定。</li>
+<li><strong>特殊值</strong>：<code>x ∈ &#123;0,1&#125;</code> 时流程自然成立；如需微优化可在开头直接返回 <code>x</code>。</li>
+</ol>
+<h3 id="二分的本质：在单调布尔函数上找“边界”"><a href="#二分的本质：在单调布尔函数上找“边界”" class="headerlink" title="二分的本质：在单调布尔函数上找“边界”"></a>二分的本质：在单调布尔函数上找“边界”</h3><p>把问题抽象为布尔谓词 <code>P(m): m^2 &lt;= x</code>。显然 <code>P(m)</code> 关于 <code>m</code> 是单调的：当 <code>m</code> 增大到超过 <code>⌊√x⌋</code> 后，<code>P(m)</code> 从真变假。</p>
+<ul>
+<li>目标就是找到“真到假”的分界点：最大的 <code>m</code> 使 <code>P(m)</code> 为真。</li>
+<li>这正是二分查找在单调布尔数组上的“上界”问题（max-true）。</li>
+</ul>
+<p>因此，模板可表述为：在 <code>[0, x]</code> 上找最大 <code>m</code> 使 <code>P(m)</code> 为真；当循环结束，<code>right</code> 指向 max-true，<code>left</code> 指向 min-false。</p>
+<h3 id="形式化不变量与正确性（为什么返回-right）"><a href="#形式化不变量与正确性（为什么返回-right）" class="headerlink" title="形式化不变量与正确性（为什么返回 right）"></a>形式化不变量与正确性（为什么返回 right）</h3><ul>
+<li>循环保持：<code>I: right</code> 始终满足 <code>P(right)</code>，<code>left</code> 始终不满足 <code>P(left-1)</code>（或说 <code>left</code> 是第一个可能满足的位置）。</li>
+<li>当 <code>P(mid)</code> 为真时，<code>mid</code> 及其左侧都为真，最大真值不在 <code>mid</code> 左边，故令 <code>left = mid + 1</code> 不会丢失 max-true。</li>
+<li>当 <code>P(mid)</code> 为假时，<code>mid</code> 及其右侧都为假，最大真值在 <code>mid</code> 左边，故令 <code>right = mid - 1</code> 保留所有可能答案。</li>
+<li>终止条件 <code>left = right + 1</code>，结合不变量推出：<code>right</code> 为 max-true，<code>left</code> 为 min-false，结论即 <code>right^2 &lt;= x &lt; left^2</code>。</li>
+</ul>
+<h3 id="等价谓词与比较技巧（避免乘法溢出）"><a href="#等价谓词与比较技巧（避免乘法溢出）" class="headerlink" title="等价谓词与比较技巧（避免乘法溢出）"></a>等价谓词与比较技巧（避免乘法溢出）</h3><ul>
+<li>本文实现用 <code>(long)mid * mid</code> 安全比较。</li>
+<li>另一种常见写法是用除法比较：<code>mid &lt;= x / mid</code> 等价于 <code>mid * mid &lt;= x</code>，可避免乘法溢出（但需要注意 <code>x / mid</code> 的整除性质以及 <code>mid != 0</code>）。</li>
+</ul>
+<h3 id="常见陷阱与反例"><a href="#常见陷阱与反例" class="headerlink" title="常见陷阱与反例"></a>常见陷阱与反例</h3><ol>
+<li>误返回 <code>left</code>：循环结束后 <code>left</code> 指向第一个使 <code>P(left)</code> 为假的位置，返回它会比正确答案大 1。</li>
+<li>右边界更新错误：在左闭右闭区间中，<code>P(mid)</code> 为假时必须 <code>right = mid - 1</code>，若写成 <code>right = mid</code> 会导致死循环或区间不收缩。</li>
+<li>中点取值与循环条件不匹配：左闭右闭应配合 <code>while (left &lt;= right)</code>；若误用 <code>left &lt; right</code> 可能漏解或死循环。</li>
+</ol>
+<h3 id="执行示例（x-8）"><a href="#执行示例（x-8）" class="headerlink" title="执行示例（x &#x3D; 8）"></a>执行示例（x &#x3D; 8）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">初始：left = 0, right = 8</span><br><span class="line"></span><br><span class="line">第一轮：mid = 4, 4^2 = 16 &gt; 8 → right = 3</span><br><span class="line">第二轮：mid = 1, 1^2 = 1  &lt; 8 → left = 2</span><br><span class="line">第三轮：mid = 2, 2^2 = 4  &lt; 8 → left = 3</span><br><span class="line">第四轮：mid = 3, 3^2 = 9  &gt; 8 → right = 2</span><br><span class="line"></span><br><span class="line">结束：left = 3, right = 2（left &gt; right）→ 返回 right = 2</span><br></pre></td></tr></table></figure>
 
-<p><strong>提示:</strong></p>
-<ul>
-<li>$1 &lt;&#x3D; nums.length &lt;&#x3D; 10^4$</li>
-<li>$-10^4 &lt;&#x3D; nums[i] &lt;&#x3D; 10^4$</li>
-<li>nums 为 <strong>无重复元素</strong> 的 <strong>升序</strong> 排列数组</li>
-<li>$-10^4 &lt;&#x3D; target &lt;&#x3D; 10^4$</li>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="解法一：二分查找（你的实现）"><a href="#解法一：二分查找（你的实现）" class="headerlink" title="解法一：二分查找（你的实现）"></a>解法一：二分查找（你的实现）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">mySqrt</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="type">int</span> mid;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = x;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            mid = left +((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> ((<span class="type">long</span>)mid * mid &lt; x)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>((<span class="type">long</span>)mid * mid &gt; x)</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解法二：牛顿迭代（常数更优）"><a href="#解法二：牛顿迭代（常数更优）" class="headerlink" title="解法二：牛顿迭代（常数更优）"></a>解法二：牛顿迭代（常数更优）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SolutionNewton</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">mySqrt</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">2</span>) <span class="keyword">return</span> x;</span><br><span class="line">        <span class="type">long</span> <span class="variable">r</span> <span class="operator">=</span> x; <span class="comment">// 用 long 防止中间计算溢出</span></span><br><span class="line">        <span class="keyword">while</span> (r * r &gt; x) &#123;</span><br><span class="line">            r = (r + x / r) &gt;&gt; <span class="number">1</span>; <span class="comment">// 等价于 (r + x / r) / 2</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="type">int</span>) r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法比较"><a href="#方法比较" class="headerlink" title="方法比较"></a>方法比较</h2><table>
+<thead>
+<tr>
+<th align="left">方面</th>
+<th align="left">二分查找</th>
+<th align="left">牛顿迭代</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">时间复杂度</td>
+<td align="left"><code>O(log x)</code></td>
+<td align="left">迭代次数很少，实际常数更优</td>
+</tr>
+<tr>
+<td align="left">空间复杂度</td>
+<td align="left"><code>O(1)</code></td>
+<td align="left"><code>O(1)</code></td>
+</tr>
+<tr>
+<td align="left">实现难度</td>
+<td align="left">简单、边界清晰</td>
+<td align="left">略高，需注意收敛与溢出</td>
+</tr>
+<tr>
+<td align="left">稳定性</td>
+<td align="left">边界与正确性易于证明</td>
+<td align="left">对初始值不敏感，但要用 long</td>
+</tr>
+</tbody></table>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><ul>
+<li>二分查找：时间 <code>O(log x)</code>，空间 <code>O(1)</code>。</li>
+<li>牛顿迭代：每次迭代为常数开销，通常 5～7 次内收敛到整数根，空间 <code>O(1)</code>。</li>
 </ul>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这道题要求我们在排序数组中找到目标值的位置，如果目标值不存在，则返回它应该被插入的位置。由于题目要求算法时间复杂度为 <code>O(log n)</code>，很明显需要使用二分搜索。</p>
-<p>对于此类问题，我们需要找到<strong>第一个大于等于目标值</strong>的元素索引，这正是二分搜索的一个常见应用场景，<br>但这一题容易模糊不清的就是对边界条件的处理。<br>要在数组中插入目标值，一共有四种情况：</p>
-<ul>
-<li>目标值在数组所有元素之前</li>
-<li>目标值是数组中的某一个元素</li>
-<li>目标值插入数组中的某一个位置</li>
-<li>目标值在数组所有元素之后</li>
+<h2 id="关键收获"><a href="#关键收获" class="headerlink" title="关键收获"></a>关键收获</h2><ul>
+<li>在整数域下通过单调性与不等式界定目标区间，是处理“向下取整”的常见套路。</li>
+<li>计算平方时建议使用更宽类型（如 <code>long</code>）以避免溢出带来的比较错误。</li>
+<li>牛顿法在需要高效近似开方时非常实用，注意以整数形式收敛并保证向下取整性质。</li>
 </ul>
-<p>因此我们可以从暴力搜索和二分查找两个角度来解答该问题。</p>
-<h3 id="二分搜索基本原理"><a href="#二分搜索基本原理" class="headerlink" title="二分搜索基本原理"></a>二分搜索基本原理</h3><p>二分搜索的基本思想是将查找范围逐步缩小为原来的一半，直到找到目标元素或确定目标元素不存在。具体步骤如下(左闭右闭区间解法)：</p>
-<ol>
-<li>设置左边界 <code>left = 0</code> 和右边界 <code>right = n - 1</code></li>
-<li>当 <code>left &lt;= right</code> 时，计算中间位置 <code>mid = left + (right - left) / 2</code></li>
-<li>如果 <code>nums[mid] == target</code>，返回 <code>mid</code></li>
-<li>如果 <code>nums[mid] &lt; target</code>，说明目标在右半部分，设置 <code>left = mid + 1</code></li>
-<li>如果 <code>nums[mid] &gt; target</code>，说明目标在左半部分，设置 <code>right = mid - 1</code></li>
-<li>如果循环结束后仍未找到目标，那么 <code>right + 1</code> 就是目标值应该插入的位置</li>
-</ol>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="暴力搜索"><a href="#暴力搜索" class="headerlink" title="暴力搜索"></a>暴力搜索</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i ++)&#123;</span><br><span class="line">            <span class="comment">// 待查元素在数组前，中，待插；</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt;= target)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">         <span class="comment">// 目标值在数组所有元素之后的情况</span></span><br><span class="line">        <span class="keyword">return</span> nums.length;</span><br></pre></td></tr></table></figure>
-<p>这个方法非常简洁，时间复杂度为<code>O(n)</code>,空间复杂度为<code>O(1)</code>，关键在于如何把前三种情况的判断条件写出来。</p>
-<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><h4 id="闭区间写法"><a href="#闭区间写法" class="headerlink" title="闭区间写法"></a>闭区间写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>[]nums, <span class="type">int</span> target)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = n - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> mid;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            mid = left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>二分查找结束条件是<code>left &gt; right</code>，也就是说，无论有没有查询到，结束的时候，right一定在left的左边，此时，如果查询到了，则直接返回mid，没有查询到，则待插位置在<code>right + 1</code>。</p>
-<h4 id="左闭右开区间写法"><a href="#左闭右开区间写法" class="headerlink" title="左闭右开区间写法"></a>左闭右开区间写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>[]nums, <span class="type">int</span> target)</span>&#123;</span><br><span class="line">        <span class="type">int</span> mid;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = nums.length;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">            mid = left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">                right = mid;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该写法除了right初始值，更新值需要改变之外，在最后return的时候，也是直接return right。<br>两种解法的最后return也可以统一写成return left，此时不需要考虑要不要加1的情况。left最终的位置一定是待插位置或者是待查位置。</p>
-<h2 id="注意事项和常见错误"><a href="#注意事项和常见错误" class="headerlink" title="注意事项和常见错误"></a>注意事项和常见错误</h2><p>使用二分搜索时，有几个常见的注意事项和潜在错误：</p>
-<ol>
-<li><p><strong>整数溢出</strong>：计算中间索引时，应使用 <code>mid := left + (right-left)/2</code> 而不是 <code>mid := (left+right)/2</code>，后者在大数据范围时可能导致整数溢出。</p>
-</li>
-<li><p><strong>循环条件</strong>：根据需要选择 <code>left &lt;= right</code> 或 <code>left &lt; right</code>。前者在循环结束时有 <code>left = right + 1</code>，后者在循环结束时有 <code>left = right</code>。</p>
-</li>
-<li><p><strong>边界更新</strong>：根据不同的搜索需求，边界更新方式也不同。例如，查找第一个满足条件的元素时，可能需要 <code>right = mid</code>，而不是 <code>right = mid - 1</code>。</p>
-</li>
-</ol>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>对于二分搜索：</p>
-<ul>
-<li>时间复杂度：$O(\log n)$，其中 $n$ 是数组的长度。每次操作都会将搜索范围缩小为原来的一半。</li>
-<li>空间复杂度：$O(1)$，只使用了常数额外空间。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>关键收获：</strong></p>
-<ol>
-<li>掌握 <code>sort.Search</code> 及其变体函数的用法和特性</li>
-<li>了解五种常见的二分搜索变体及其适用场景</li>
-<li>学会处理二分搜索中的边界条件和常见错误</li>
-<li>掌握在实际编程中应用二分搜索的技巧</li>
-</ol>
-<p>二分搜索不仅限于在数组中查找元素，还可以用于各种需要在有序空间中高效查找的场景，如二分答案、查找边界等。而且只要能找到一个判断条件把数组分割成两部分，我们都可以使用二分查找。灵活运用这种算法技术，将大大提高我们解决问题的效率。 </p>
 
         
       </div>
@@ -388,27 +416,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2025/10/13/LeetCode-34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/"
-      title="LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2025/10/09/LeetCode-704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"
-      title="LeetCode-704-二分查找"
+      href="/2025/10/13/LeetCode-34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/"
+      title="LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置"
      >
 
     <p class="title-text">
       
-        LeetCode-704-二分查找
+        LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
