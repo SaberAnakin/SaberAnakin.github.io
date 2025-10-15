@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>LeetCode 27 - 移除元素（Remove Element） | 老猫识途</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="使用双指针技巧原地移除数组中指定值的元素，时间复杂度O(n)，空间复杂度O(1)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 27 - 移除元素（Remove Element）">
+<meta property="og:url" content="https://saberanakin.github.io/2025/01/27/LeetCode-27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/index.html">
+<meta property="og:site_name" content="老猫识途">
+<meta property="og:description" content="使用双指针技巧原地移除数组中指定值的元素，时间复杂度O(n)，空间复杂度O(1)">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-27T02:30:00.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:48:44.718Z">
+<meta property="article:author" content="AnakinLu">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="双指针">
+<meta property="article:tag" content="Easy">
+<meta property="article:tag" content="面试经典150">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="老猫识途" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/images/banner5.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="  ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>老猫识途 </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/images/ask.jpg></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">AnakinLu </div>
+      <div class="dot"></div>
+      <div class="subtitle">嘿，我在这里 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/SaberAnakin" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Categories</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">
+                算法刷题
+                <div class="category-count">5</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">
+                LeetCode
+                <div class="category-count">5</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/">
+                面试经典150
+                <div class="category-count">3</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/Hot100/">
+                Hot100
+                <div class="category-count">1</div>
+            </a>
+        </div></div></div></div>
+            <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">
+                技术教程
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Hot100/" rel="tag">Hot100</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Medium/" rel="tag">Medium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%99%E4%BD%9C/" rel="tag">写作</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Recent Posts</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2025/10/14/LeetCode-69-x-%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/" title="LeetCode-69-x 的平方根" >
+            <div class="recent-link-text">
+              LeetCode-69-x 的平方根
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/13/LeetCode-34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/" title="LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置" >
+            <div class="recent-link-text">
+              LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/11/LeetCode-35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/" title="LeetCode-35-搜索插入位置" >
+            <div class="recent-link-text">
+              LeetCode-35-搜索插入位置
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/09/LeetCode-704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" title="LeetCode-704-二分查找" >
+            <div class="recent-link-text">
+              LeetCode-704-二分查找
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/05/24/Markdown%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" title="Markdown语法指南" >
+            <div class="recent-link-text">
+              Markdown语法指南
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2025/10 ">
+          October 2025 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2025/05 ">
+          May 2025 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2025/01 ">
+          January 2025 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+
+<article id="post-LeetCode-27-移除元素" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        LeetCode 27 - 移除元素（Remove Element）
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2025-01-27T02:30:00.000Z" itemprop="datePublished">2025-01-27</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">算法刷题</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">LeetCode</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/">面试经典150</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            5.9k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给你一个数组 <code>nums</code> 和一个值 <code>val</code>，你需要 <strong>原地</strong> 移除所有数值等于 <code>val</code> 的元素。元素的顺序可能发生改变。然后返回 <code>nums</code> 中与 <code>val</code> 不同的元素的数量。</p>
+<p>假设 <code>nums</code> 中不等于 <code>val</code> 的元素数量为 <code>k</code>，要通过此题，您需要执行以下操作：</p>
+<ol>
+<li>更改 <code>nums</code> 数组，使 <code>nums</code> 的前 <code>k</code> 个元素包含不等于 <code>val</code> 的元素</li>
+<li><code>nums</code> 的其余元素和 <code>nums</code> 的大小并不重要</li>
+<li>返回 <code>k</code></li>
+</ol>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,2,2,3], val = 3</span><br><span class="line">输出：2, nums = [2,2,_,_]</span><br><span class="line">解释：你的函数应该返回 k = 2, 并且 nums 中的前两个元素均为 2。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1,2,2,3,0,4,2], val = 2</span><br><span class="line">输出：5, nums = [0,1,4,0,3,_,_,_]</span><br><span class="line">解释：你的函数应该返回 k = 5，并且 nums 中的前五个元素为 0,0,1,3,4。</span><br><span class="line">注意这五个元素可以任意顺序返回。</span><br></pre></td></tr></table></figure>
+
+<h3 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h3><ul>
+<li><code>0 &lt;= nums.length &lt;= 100</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 50</code></li>
+<li><code>0 &lt;= val &lt;= 100</code></li>
+</ul>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这道题的核心是使用 <strong>双指针技巧</strong> 来原地修改数组。关键思想是：</p>
+<p><strong>核心思路</strong>：使用两个指针，一个慢指针 <code>slowindex</code> 指向下一个有效元素应该放置的位置，一个快指针 <code>fastindex</code> 遍历整个数组。</p>
+<h3 id="双指针详细解析"><a href="#双指针详细解析" class="headerlink" title="双指针详细解析"></a>双指针详细解析</h3><h4 id="指针作用"><a href="#指针作用" class="headerlink" title="指针作用"></a>指针作用</h4><ul>
+<li><strong>快指针 <code>fastindex</code></strong>：负责遍历整个数组，寻找需要保留的元素</li>
+<li><strong>慢指针 <code>slowindex</code></strong>：负责记录下一个有效元素应该放置的位置</li>
+</ul>
+<h4 id="核心逻辑"><a href="#核心逻辑" class="headerlink" title="核心逻辑"></a>核心逻辑</h4><ol>
+<li><strong>快指针遍历</strong>：<code>fastindex</code> 从 0 开始，逐个检查数组中的每个元素</li>
+<li><strong>条件筛选</strong>：只有当 <code>nums[fastindex] != val</code> 时，才说明这是一个需要保留的元素</li>
+<li><strong>元素复制</strong>：将有效元素复制到慢指针位置：<code>nums[slowindex] = nums[fastindex]</code></li>
+<li><strong>指针移动</strong>：复制完成后，慢指针自动向前移动：<code>slowindex++</code></li>
+<li><strong>跳过无效元素</strong>：当 <code>nums[fastindex] == val</code> 时，快指针继续前进，慢指针不动</li>
+</ol>
+<h4 id="关键优势"><a href="#关键优势" class="headerlink" title="关键优势"></a>关键优势</h4><ul>
+<li><strong>一次遍历</strong>：只需要遍历一次数组，时间复杂度 O(n)</li>
+<li><strong>原地修改</strong>：不需要额外空间，直接在原数组上操作</li>
+<li><strong>逻辑清晰</strong>：快指针负责”找”，慢指针负责”放”</li>
+</ul>
+<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><ol>
+<li><strong>初始化</strong>：设置 <code>slowindex = 0</code>，<code>fastindex = 0</code></li>
+<li><strong>遍历数组</strong>：使用 <code>fastindex</code> 指针遍历整个数组</li>
+<li><strong>条件判断</strong>：<ul>
+<li>如果 <code>nums[fastindex] != val</code>，说明这是一个需要保留的元素</li>
+<li>将 <code>nums[fastindex]</code> 复制到 <code>nums[slowindex]</code> 位置</li>
+<li>然后 <code>slowindex</code> 指针向前移动一位</li>
+</ul>
+</li>
+<li><strong>返回结果</strong>：<code>slowindex</code> 的值就是移除指定元素后数组的长度</li>
+</ol>
+<h3 id="详细示例演练"><a href="#详细示例演练" class="headerlink" title="详细示例演练"></a>详细示例演练</h3><h4 id="示例1：nums-3-2-2-3-val-3"><a href="#示例1：nums-3-2-2-3-val-3" class="headerlink" title="示例1：nums &#x3D; [3,2,2,3], val &#x3D; 3"></a>示例1：nums &#x3D; [3,2,2,3], val &#x3D; 3</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">初始状态：</span><br><span class="line">nums = [3, 2, 2, 3]</span><br><span class="line">slowindex = 0, fastindex = 0</span><br><span class="line"></span><br><span class="line">步骤1: fastindex = 0</span><br><span class="line">nums[0] = 3 == val (需要移除)</span><br><span class="line">跳过，不执行复制操作</span><br><span class="line">slowindex = 0, fastindex = 1</span><br><span class="line"></span><br><span class="line">步骤2: fastindex = 1  </span><br><span class="line">nums[1] = 2 != val (需要保留)</span><br><span class="line">nums[slowindex] = nums[fastindex] → nums[0] = 2</span><br><span class="line">slowindex++ → slowindex = 1, fastindex = 2</span><br><span class="line"></span><br><span class="line">步骤3: fastindex = 2</span><br><span class="line">nums[2] = 2 != val (需要保留)  </span><br><span class="line">nums[slowindex] = nums[fastindex] → nums[1] = 2</span><br><span class="line">slowindex++ → slowindex = 2, fastindex = 3</span><br><span class="line"></span><br><span class="line">步骤4: fastindex = 3</span><br><span class="line">nums[3] = 3 == val (需要移除)</span><br><span class="line">跳过，不执行复制操作</span><br><span class="line">slowindex = 2, fastindex = 4 (结束)</span><br><span class="line"></span><br><span class="line">最终结果：</span><br><span class="line">nums = [2, 2, 3, 3]  (前2个元素是有效元素)</span><br><span class="line">返回 slowindex = 2</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例2：nums-0-1-2-2-3-0-4-2-val-2"><a href="#示例2：nums-0-1-2-2-3-0-4-2-val-2" class="headerlink" title="示例2：nums &#x3D; [0,1,2,2,3,0,4,2], val &#x3D; 2"></a>示例2：nums &#x3D; [0,1,2,2,3,0,4,2], val &#x3D; 2</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">初始状态：</span><br><span class="line">nums = [0, 1, 2, 2, 3, 0, 4, 2]</span><br><span class="line">slowindex = 0, fastindex = 0</span><br><span class="line"></span><br><span class="line">步骤1: fastindex = 0</span><br><span class="line">nums[0] = 0 != val (需要保留)</span><br><span class="line">nums[0] = 0, slowindex = 1, fastindex = 1</span><br><span class="line"></span><br><span class="line">步骤2: fastindex = 1</span><br><span class="line">nums[1] = 1 != val (需要保留)</span><br><span class="line">nums[1] = 1, slowindex = 2, fastindex = 2</span><br><span class="line"></span><br><span class="line">步骤3: fastindex = 2</span><br><span class="line">nums[2] = 2 == val (需要移除)</span><br><span class="line">跳过，slowindex = 2, fastindex = 3</span><br><span class="line"></span><br><span class="line">步骤4: fastindex = 3</span><br><span class="line">nums[3] = 2 == val (需要移除)</span><br><span class="line">跳过，slowindex = 2, fastindex = 4</span><br><span class="line"></span><br><span class="line">步骤5: fastindex = 4</span><br><span class="line">nums[4] = 3 != val (需要保留)</span><br><span class="line">nums[2] = 3, slowindex = 3, fastindex = 5</span><br><span class="line"></span><br><span class="line">步骤6: fastindex = 5</span><br><span class="line">nums[5] = 0 != val (需要保留)</span><br><span class="line">nums[3] = 0, slowindex = 4, fastindex = 6</span><br><span class="line"></span><br><span class="line">步骤7: fastindex = 6</span><br><span class="line">nums[6] = 4 != val (需要保留)</span><br><span class="line">nums[4] = 4, slowindex = 5, fastindex = 7</span><br><span class="line"></span><br><span class="line">步骤8: fastindex = 7</span><br><span class="line">nums[7] = 2 == val (需要移除)</span><br><span class="line">跳过，slowindex = 5, fastindex = 8 (结束)</span><br><span class="line"></span><br><span class="line">最终结果：</span><br><span class="line">nums = [0, 1, 3, 0, 4, 0, 4, 2]  (前5个元素是有效元素)</span><br><span class="line">返回 slowindex = 5</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="关键点分析"><a href="#关键点分析" class="headerlink" title="关键点分析"></a>关键点分析</h3><ol>
+<li><strong>原地修改</strong>：不需要额外的数组空间，直接在原数组上操作</li>
+<li><strong>双指针移动</strong>：慢指针只在找到有效元素时才移动</li>
+<li><strong>元素覆盖</strong>：有效元素会覆盖掉需要移除的元素位置</li>
+</ol>
+<h3 id="边界情况处理"><a href="#边界情况处理" class="headerlink" title="边界情况处理"></a>边界情况处理</h3><ul>
+<li><strong>空数组</strong>：<code>nums.length = 0</code>，直接返回 0</li>
+<li><strong>所有元素都等于 val</strong>：<code>slow</code> 始终为 0，返回 0</li>
+<li><strong>没有元素等于 val</strong>：所有元素都被保留，<code>slow</code> 等于原数组长度</li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="Java-实现（双指针方法）"><a href="#Java-实现（双指针方法）" class="headerlink" title="Java 实现（双指针方法）"></a>Java 实现（双指针方法）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">slowindex</span> <span class="operator">=</span> <span class="number">0</span>;  <span class="comment">// 慢指针，指向下一个有效元素应该放置的位置</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 快指针遍历整个数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">fastindex</span> <span class="operator">=</span> <span class="number">0</span>; fastindex &lt; nums.length; fastindex++) &#123;</span><br><span class="line">            <span class="comment">// 如果当前元素不等于要移除的值，则保留</span></span><br><span class="line">            <span class="keyword">if</span>(nums[fastindex] != val) &#123;</span><br><span class="line">                nums[slowindex++] = nums[fastindex];  <span class="comment">// 将有效元素放到慢指针位置，然后慢指针前移</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果 nums[fastindex] == val，则跳过，慢指针不动</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> slowindex;  <span class="comment">// 返回有效元素的个数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码逐行解析"><a href="#代码逐行解析" class="headerlink" title="代码逐行解析"></a>代码逐行解析</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">slowindex</span> <span class="operator">=</span> <span class="number">0</span>;  <span class="comment">// 初始化慢指针，指向数组的第一个位置</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">fastindex</span> <span class="operator">=</span> <span class="number">0</span>; fastindex &lt; nums.length; fastindex++) &#123;</span><br><span class="line">    <span class="comment">// 快指针从0开始，遍历到数组末尾</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(nums[fastindex] != val) &#123;</span><br><span class="line">    <span class="comment">// 检查当前元素是否需要保留</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nums[slowindex++] = nums[fastindex];</span><br><span class="line"><span class="comment">// 这行代码等价于：</span></span><br><span class="line"><span class="comment">// nums[slowindex] = nums[fastindex];</span></span><br><span class="line"><span class="comment">// slowindex++;</span></span><br><span class="line"><span class="comment">// 将有效元素复制到慢指针位置，然后慢指针向前移动</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> slowindex;  <span class="comment">// 慢指针的值就是有效元素的个数</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="对比：暴力解法-vs-双指针解法"><a href="#对比：暴力解法-vs-双指针解法" class="headerlink" title="对比：暴力解法 vs 双指针解法"></a>对比：暴力解法 vs 双指针解法</h3><h4 id="暴力解法（你的第一个代码）"><a href="#暴力解法（你的第一个代码）" class="headerlink" title="暴力解法（你的第一个代码）"></a>暴力解法（你的第一个代码）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; l; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[i] == val) &#123;</span><br><span class="line">            <span class="comment">// 发现需要移除的元素，将后面的所有元素向前移动一位</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; l; j++) &#123;</span><br><span class="line">                nums[j - <span class="number">1</span>] = nums[j];</span><br><span class="line">            &#125; </span><br><span class="line">            l--;  <span class="comment">// 数组长度减1</span></span><br><span class="line">            i--;  <span class="comment">// 因为元素前移，需要重新检查当前位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>暴力解法的问题</strong>：</p>
+<ul>
+<li><strong>时间复杂度</strong>：O(n²) - 每次移除元素都需要移动后面的所有元素</li>
+<li><strong>效率低下</strong>：对于每个需要移除的元素，都要执行 O(n) 的移动操作</li>
+<li><strong>代码复杂</strong>：需要处理数组长度变化和索引回退</li>
+</ul>
+<h4 id="双指针解法（优化后）"><a href="#双指针解法（优化后）" class="headerlink" title="双指针解法（优化后）"></a>双指针解法（优化后）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">slowindex</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">fastindex</span> <span class="operator">=</span> <span class="number">0</span>; fastindex &lt; nums.length; fastindex++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[fastindex] != val) &#123;</span><br><span class="line">            nums[slowindex++] = nums[fastindex]; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slowindex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>双指针解法的优势</strong>：</p>
+<ul>
+<li><strong>时间复杂度</strong>：O(n) - 只需要一次遍历</li>
+<li><strong>空间复杂度</strong>：O(1) - 只使用常数额外空间</li>
+<li><strong>代码简洁</strong>：逻辑清晰，易于理解和维护</li>
+</ul>
+<h2 id="方法比较"><a href="#方法比较" class="headerlink" title="方法比较"></a>方法比较</h2><table>
+<thead>
+<tr>
+<th>方面</th>
+<th>双指针方法</th>
+<th>暴力方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>时间复杂度</td>
+<td>O(n)</td>
+<td>O(n²)</td>
+</tr>
+<tr>
+<td>空间复杂度</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>遍历次数</td>
+<td>1次</td>
+<td>最多n次（每个移除元素都要移动）</td>
+</tr>
+<tr>
+<td>代码复杂度</td>
+<td>简单</td>
+<td>复杂</td>
+</tr>
+<tr>
+<td>执行效率</td>
+<td>高效</td>
+<td>低效</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>一次遍历，逻辑清晰</td>
+<td>思路直观</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>需要理解双指针概念</td>
+<td>效率低，代码复杂</td>
+</tr>
+<tr>
+<td>推荐度</td>
+<td>★★★★★</td>
+<td>★★☆☆☆</td>
+</tr>
+</tbody></table>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ul>
+<li><strong>O(n)</strong>：只需要遍历一次数组，其中 n 是数组的长度</li>
+<li>每个元素最多被访问一次，没有嵌套循环</li>
+</ul>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><ul>
+<li><strong>O(1)</strong>：只使用了常数额外空间（两个指针变量）</li>
+<li>没有使用额外的数组或其他数据结构</li>
+</ul>
+<h2 id="双指针技巧深入理解"><a href="#双指针技巧深入理解" class="headerlink" title="双指针技巧深入理解"></a>双指针技巧深入理解</h2><h3 id="为什么叫”双指针”？"><a href="#为什么叫”双指针”？" class="headerlink" title="为什么叫”双指针”？"></a>为什么叫”双指针”？</h3><p>虽然这里使用的是两个整数变量 <code>slowindex</code> 和 <code>fastindex</code>，但它们本质上是指向数组位置的”指针”：</p>
+<ul>
+<li><strong>指针</strong>：指向数组中某个位置的索引</li>
+<li><strong>双指针</strong>：使用两个索引来协同工作，解决数组问题</li>
+</ul>
+<h3 id="双指针的核心思想"><a href="#双指针的核心思想" class="headerlink" title="双指针的核心思想"></a>双指针的核心思想</h3><ol>
+<li><p><strong>分工明确</strong>：</p>
+<ul>
+<li>快指针：负责”探索”，遍历整个数组</li>
+<li>慢指针：负责”收集”，记录有效元素的位置</li>
+</ul>
+</li>
+<li><p><strong>同步移动</strong>：</p>
+<ul>
+<li>快指针总是向前移动</li>
+<li>慢指针只在找到有效元素时才移动</li>
+</ul>
+</li>
+<li><p><strong>空间复用</strong>：</p>
+<ul>
+<li>利用数组前面的空间存储有效元素</li>
+<li>避免使用额外的数组空间</li>
+</ul>
+</li>
+</ol>
+<h3 id="双指针的适用场景"><a href="#双指针的适用场景" class="headerlink" title="双指针的适用场景"></a>双指针的适用场景</h3><p>双指针技巧特别适用于以下类型的数组问题：</p>
+<ul>
+<li><strong>原地删除</strong>：需要删除数组中的某些元素</li>
+<li><strong>去重</strong>：移除数组中的重复元素</li>
+<li><strong>分区</strong>：将数组按某种条件分成两部分</li>
+<li><strong>合并</strong>：合并两个有序数组</li>
+</ul>
+<h3 id="常见双指针模式"><a href="#常见双指针模式" class="headerlink" title="常见双指针模式"></a>常见双指针模式</h3><h4 id="模式1：快慢指针（本题使用）"><a href="#模式1：快慢指针（本题使用）" class="headerlink" title="模式1：快慢指针（本题使用）"></a>模式1：快慢指针（本题使用）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">slow</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">fast</span> <span class="operator">=</span> <span class="number">0</span>; fast &lt; nums.length; fast++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(condition) &#123;</span><br><span class="line">        nums[slow++] = nums[fast];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="模式2：左右指针"><a href="#模式2：左右指针" class="headerlink" title="模式2：左右指针"></a>模式2：左右指针</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">    <span class="comment">// 根据条件移动指针</span></span><br><span class="line">    <span class="keyword">if</span>(condition) left++;</span><br><span class="line">    <span class="keyword">else</span> right--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h3><p>为了更好地理解双指针的工作过程，可以在代码中添加调试输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">slowindex</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">&quot;初始数组: &quot;</span> + Arrays.toString(nums));</span><br><span class="line">    System.out.println(<span class="string">&quot;要移除的值: &quot;</span> + val);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">fastindex</span> <span class="operator">=</span> <span class="number">0</span>; fastindex &lt; nums.length; fastindex++) &#123;</span><br><span class="line">        System.out.printf(<span class="string">&quot;步骤 %d: fastindex=%d, slowindex=%d, nums[%d]=%d&quot;</span>, </span><br><span class="line">                         fastindex + <span class="number">1</span>, fastindex, slowindex, fastindex, nums[fastindex]);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums[fastindex] != val) &#123;</span><br><span class="line">            nums[slowindex] = nums[fastindex];</span><br><span class="line">            slowindex++;</span><br><span class="line">            System.out.printf(<span class="string">&quot; -&gt; 保留，复制到位置%d\n&quot;</span>, slowindex - <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot; -&gt; 跳过&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">&quot;当前数组: &quot;</span> + Arrays.toString(nums));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">&quot;最终结果: &quot;</span> + slowindex + <span class="string">&quot; 个有效元素&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> slowindex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="关键收获"><a href="#关键收获" class="headerlink" title="关键收获"></a>关键收获</h2><h3 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a>重要概念</h3><ol>
+<li><strong>双指针技巧</strong>：在处理数组问题时，双指针是常用的优化技巧</li>
+<li><strong>原地修改</strong>：在不使用额外空间的情况下修改数组</li>
+<li><strong>快慢指针</strong>：慢指针记录有效位置，快指针遍历数组</li>
+<li><strong>空间复用</strong>：利用数组前面的空间存储有效元素</li>
+</ol>
+<h3 id="常见陷阱"><a href="#常见陷阱" class="headerlink" title="常见陷阱"></a>常见陷阱</h3><ol>
+<li><strong>忘记移动慢指针</strong>：只有在找到有效元素时才移动慢指针</li>
+<li><strong>边界条件</strong>：注意处理空数组和所有元素都需要移除的情况</li>
+<li><strong>理解题意</strong>：题目不要求保持原有顺序，只需要前 k 个元素有效</li>
+<li><strong>索引混淆</strong>：注意区分快指针和慢指针的作用</li>
+</ol>
+<h3 id="解题思路总结"><a href="#解题思路总结" class="headerlink" title="解题思路总结"></a>解题思路总结</h3><ol>
+<li><strong>识别问题类型</strong>：需要原地删除数组元素</li>
+<li><strong>选择算法</strong>：双指针技巧是最优解</li>
+<li><strong>实现步骤</strong>：<ul>
+<li>初始化两个指针</li>
+<li>快指针遍历，慢指针收集</li>
+<li>返回慢指针位置</li>
+</ul>
+</li>
+</ol>
+<h3 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">LeetCode 26. 删除有序数组中的重复项</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/">LeetCode 283. 移动零</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/">LeetCode 80. 删除有序数组中的重复项 II</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">LeetCode 977. 有序数组的平方</a></li>
+</ul>
+<p>这道题是双指针技巧的经典应用，掌握了这个模式后，可以解决很多类似的数组操作问题。通过对比暴力解法和双指针解法，我们可以清楚地看到算法优化的重要性。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2025/05/22/hello-world/"
+      title="Hello World"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Hello World
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right  disabled "
+     >
+
+    <p class="title-text">
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2025 AnakinLu<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
