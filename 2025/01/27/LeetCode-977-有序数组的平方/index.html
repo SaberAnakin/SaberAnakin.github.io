@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>LeetCode 977 - 有序数组的平方（Squares of a Sorted Array） | 老猫识途</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="使用双指针技巧解决有序数组平方排序问题，时间复杂度O(n)，空间复杂度O(1)，核心思想是利用数组已排序的特性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 977 - 有序数组的平方（Squares of a Sorted Array）">
+<meta property="og:url" content="https://saberanakin.github.io/2025/01/27/LeetCode-977-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/index.html">
+<meta property="og:site_name" content="老猫识途">
+<meta property="og:description" content="使用双指针技巧解决有序数组平方排序问题，时间复杂度O(n)，空间复杂度O(1)，核心思想是利用数组已排序的特性">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-27T02:30:00.000Z">
+<meta property="article:modified_time" content="2025-10-19T03:48:57.816Z">
+<meta property="article:author" content="AnakinLu">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="双指针">
+<meta property="article:tag" content="Easy">
+<meta property="article:tag" content="面试经典150">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="老猫识途" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/images/banner5.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="  ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>老猫识途 </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/images/ask.jpg></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">AnakinLu </div>
+      <div class="dot"></div>
+      <div class="subtitle">嘿，我在这里 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/SaberAnakin" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Categories</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">
+                算法刷题
+                <div class="category-count">9</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">
+                LeetCode
+                <div class="category-count">9</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/Hot100/">
+                Hot100
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/">
+                面试经典150
+                <div class="category-count">7</div>
+            </a>
+        </div></div></div></div>
+            <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">
+                技术教程
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Hot100/" rel="tag">Hot100</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Medium/" rel="tag">Medium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%99%E4%BD%9C/" rel="tag">写作</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Recent Posts</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2025/10/18/LeetCode-844-%E6%AF%94%E8%BE%83%E5%90%AB%E9%80%80%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="LeetCode 844 - 比较含退格的字符串（Backspace String Compare）" >
+            <div class="recent-link-text">
+              LeetCode 844 - 比较含退格的字符串（Backspace String Compare）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/17/LeetCode-283-%E7%A7%BB%E5%8A%A8%E9%9B%B6/" title="LeetCode 283 - 移动零（Move Zeroes）" >
+            <div class="recent-link-text">
+              LeetCode 283 - 移动零（Move Zeroes）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/16/LeetCode-26-%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" title="LeetCode 26 - 删除有序数组中的重复项（Remove Duplicates from Sorted Array）" >
+            <div class="recent-link-text">
+              LeetCode 26 - 删除有序数组中的重复项（Remove Duplicates from Sorted Array）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/15/LeetCode-27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" title="LeetCode 27 - 移除元素（Remove Element）" >
+            <div class="recent-link-text">
+              LeetCode 27 - 移除元素（Remove Element）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/14/LeetCode-69-x-%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/" title="LeetCode-69-x 的平方根" >
+            <div class="recent-link-text">
+              LeetCode-69-x 的平方根
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2025/10 ">
+          October 2025 
+          <div class="archive-count">8 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2025/05 ">
+          May 2025 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2025/01 ">
+          January 2025 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+
+<article id="post-LeetCode-977-有序数组的平方" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        LeetCode 977 - 有序数组的平方（Squares of a Sorted Array）
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2025-01-27T02:30:00.000Z" itemprop="datePublished">2025-01-27</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">算法刷题</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">LeetCode</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/">面试经典150</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            4.3k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="LeetCode-977-有序数组的平方"><a href="#LeetCode-977-有序数组的平方" class="headerlink" title="LeetCode 977 - 有序数组的平方"></a>LeetCode 977 - 有序数组的平方</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给你一个按 <strong>非递减顺序</strong> 排序的整数数组 <code>nums</code>，返回 <strong>每个数字的平方</strong> 组成的新数组，要求也按 <strong>非递减顺序</strong> 排序。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-4,-1,0,3,10]</span><br><span class="line">输出：[0,1,9,16,100]</span><br><span class="line">解释：平方后，数组变为 [16,1,0,9,100]</span><br><span class="line">排序后，数组变为 [0,1,9,16,100]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-7,-3,2,3,11]</span><br><span class="line">输出：[4,9,9,49,121]</span><br></pre></td></tr></table></figure>
+
+<h3 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h3><ul>
+<li><code>1 &lt;= nums.length &lt;= 10^4</code></li>
+<li><code>-10^4 &lt;= nums[i] &lt;= 10^4</code></li>
+<li><code>nums</code> 已按 <strong>非递减顺序</strong> 排序</li>
+</ul>
+<h3 id="进阶要求"><a href="#进阶要求" class="headerlink" title="进阶要求"></a>进阶要求</h3><p>请你设计时间复杂度为 $O(n)$ 的算法解决本问题。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="核心洞察"><a href="#核心洞察" class="headerlink" title="核心洞察"></a>核心洞察</h3><p>这道题的关键在于理解<strong>数组已排序</strong>这个重要特性。对于已排序的数组，平方后的最大值只可能出现在数组的两端：</p>
+<ul>
+<li><strong>负数部分</strong>：越小的负数，平方后越大</li>
+<li><strong>正数部分</strong>：越大的正数，平方后越大</li>
+</ul>
+<h3 id="方法一：双指针策略"><a href="#方法一：双指针策略" class="headerlink" title="方法一：双指针策略"></a>方法一：双指针策略</h3><p>利用双指针从数组两端向中间移动，比较两端的平方值，将较大的值放入结果数组的末尾：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">原数组: [-4, -1, 0, 3, 10]</span><br><span class="line">        ↑              ↑</span><br><span class="line">       left           right</span><br><span class="line"></span><br><span class="line">平方后: [16,  1, 0, 9, 100]</span><br><span class="line">        ↑              ↑</span><br><span class="line">       left           right</span><br></pre></td></tr></table></figure>
+
+<p><strong>算法步骤：</strong></p>
+<ol>
+<li>初始化两个指针：<code>left = 0</code>，<code>right = n - 1</code></li>
+<li>初始化结果数组 <code>result</code>，长度为 <code>n</code></li>
+<li>从右到左填充结果数组：<ul>
+<li>比较 <code>nums[left]^2</code> 和 <code>nums[right]^2</code></li>
+<li>将较大的值放入 <code>result[index]</code></li>
+<li>移动相应的指针</li>
+</ul>
+</li>
+<li>重复直到所有位置都被填充</li>
+</ol>
+<h3 id="方法二：归并排序思想"><a href="#方法二：归并排序思想" class="headerlink" title="方法二：归并排序思想"></a>方法二：归并排序思想</h3><p>这种方法更好地利用了「数组已排序」的特性：</p>
+<ol>
+<li><strong>找到分界线</strong>：确定负数与非负数的分界点 <code>neg</code></li>
+<li><strong>分析平方后的特性</strong>：<ul>
+<li>负数部分平方后：<code>nums[0]^2</code> 到 <code>nums[neg]^2</code> 单调递减</li>
+<li>正数部分平方后：<code>nums[neg+1]^2</code> 到 <code>nums[n-1]^2</code> 单调递增</li>
+</ul>
+</li>
+<li><strong>归并两个有序子数组</strong>：使用两个指针分别指向分界线两侧</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">原数组: [-4, -1, 0, 3, 10]</span><br><span class="line">              ↑</span><br><span class="line">           分界线</span><br><span class="line"></span><br><span class="line">平方后: [16,  1, 0, 9, 100]</span><br><span class="line">        ↓    ↓  ↑  ↑   ↑</span><br><span class="line">      递减  递减 递增 递增 递增</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么这些方法有效？"><a href="#为什么这些方法有效？" class="headerlink" title="为什么这些方法有效？"></a>为什么这些方法有效？</h3><p><strong>双指针方法：</strong></p>
+<ul>
+<li>如果 <code>|nums[left]| &gt; |nums[right]|</code>，那么 <code>nums[left]^2</code> 一定大于 <code>nums[right]^2</code></li>
+<li>如果 <code>|nums[left]| &lt;= |nums[right]|</code>，那么 <code>nums[right]^2</code> 一定大于等于 <code>nums[left]^2</code></li>
+</ul>
+<p><strong>归并排序思想：</strong></p>
+<ul>
+<li>充分利用了数组已排序的特性</li>
+<li>平方后的两个子数组都是有序的，可以直接归并</li>
+<li>逻辑更加清晰，更容易理解和实现</li>
+</ul>
+<h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="关键实现要点"><a href="#关键实现要点" class="headerlink" title="关键实现要点"></a>关键实现要点</h3><ol>
+<li><strong>绝对值比较</strong>：比较 <code>abs(nums[left])</code> 和 <code>abs(nums[right])</code> 而不是直接比较平方值，避免溢出</li>
+<li><strong>从右到左填充</strong>：确保结果数组按非递减顺序排列</li>
+<li><strong>指针移动</strong>：根据比较结果移动相应的指针</li>
+</ol>
+<h3 id="执行过程示例"><a href="#执行过程示例" class="headerlink" title="执行过程示例"></a>执行过程示例</h3><h4 id="双指针方法"><a href="#双指针方法" class="headerlink" title="双指针方法"></a>双指针方法</h4><p>以 <code>nums = [-4, -1, 0, 3, 10]</code> 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Step 1: left=0, right=4, index=4</span><br><span class="line">        |nums[0]| = 4, |nums[4]| = 10</span><br><span class="line">        4 &lt; 10, 所以 nums[4]^2 = 100 更大</span><br><span class="line">        result[4] = 100, right--</span><br><span class="line"></span><br><span class="line">Step 2: left=0, right=3, index=3</span><br><span class="line">        |nums[0]| = 4, |nums[3]| = 3</span><br><span class="line">        4 &gt; 3, 所以 nums[0]^2 = 16 更大</span><br><span class="line">        result[3] = 16, left++</span><br><span class="line"></span><br><span class="line">Step 3: left=1, right=3, index=2</span><br><span class="line">        |nums[1]| = 1, |nums[3]| = 3</span><br><span class="line">        1 &lt; 3, 所以 nums[3]^2 = 9 更大</span><br><span class="line">        result[2] = 9, right--</span><br><span class="line"></span><br><span class="line">Step 4: left=1, right=2, index=1</span><br><span class="line">        |nums[1]| = 1, |nums[2]| = 0</span><br><span class="line">        1 &gt; 0, 所以 nums[1]^2 = 1 更大</span><br><span class="line">        result[1] = 1, left++</span><br><span class="line"></span><br><span class="line">Step 5: left=2, right=2, index=0</span><br><span class="line">        |nums[2]| = 0, |nums[2]| = 0</span><br><span class="line">        相等，取任意一个</span><br><span class="line">        result[0] = 0</span><br><span class="line"></span><br><span class="line">最终结果: [0, 1, 9, 16, 100]</span><br></pre></td></tr></table></figure>
+
+<h4 id="归并排序思想"><a href="#归并排序思想" class="headerlink" title="归并排序思想"></a>归并排序思想</h4><p>以 <code>nums = [-4, -1, 0, 3, 10]</code> 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Step 1: 找分界线</span><br><span class="line">        negative = 1 (nums[1] = -1 是最后一个负数)</span><br><span class="line"></span><br><span class="line">Step 2: 初始化指针</span><br><span class="line">        i = 1 (指向最后一个负数)</span><br><span class="line">        j = 2 (指向第一个非负数)</span><br><span class="line">        index = 0</span><br><span class="line"></span><br><span class="line">Step 3: 归并过程</span><br><span class="line">        i=1, j=2: nums[1]^2=1, nums[2]^2=0</span><br><span class="line">        1 &gt; 0, 选择 nums[2]^2=0</span><br><span class="line">        result[0] = 0, j++, index++</span><br><span class="line"></span><br><span class="line">        i=1, j=3: nums[1]^2=1, nums[3]^2=9</span><br><span class="line">        1 &lt; 9, 选择 nums[1]^2=1</span><br><span class="line">        result[1] = 1, i--, index++</span><br><span class="line"></span><br><span class="line">        i=0, j=3: nums[0]^2=16, nums[3]^2=9</span><br><span class="line">        16 &gt; 9, 选择 nums[3]^2=9</span><br><span class="line">        result[2] = 9, j++, index++</span><br><span class="line"></span><br><span class="line">        i=0, j=4: nums[0]^2=16, nums[4]^2=100</span><br><span class="line">        16 &lt; 100, 选择 nums[0]^2=16</span><br><span class="line">        result[3] = 16, i--, index++</span><br><span class="line"></span><br><span class="line">        i=-1, j=4: 负数部分已处理完</span><br><span class="line">        result[4] = 100, j++, index++</span><br><span class="line"></span><br><span class="line">最终结果: [0, 1, 9, 16, 100]</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="方法一：双指针（推荐）"><a href="#方法一：双指针（推荐）" class="headerlink" title="方法一：双指针（推荐）"></a>方法一：双指针（推荐）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] sortedSquares(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    <span class="type">int</span>[] result = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = n - <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> n - <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="comment">// 比较绝对值，避免溢出</span></span><br><span class="line">        <span class="keyword">if</span> (Math.abs(nums[left]) &gt; Math.abs(nums[right])) &#123;</span><br><span class="line">            result[index] = nums[left] * nums[left];</span><br><span class="line">            left++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result[index] = nums[right] * nums[right];</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        index--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二：归并排序思想（推荐）"><a href="#方法二：归并排序思想（推荐）" class="headerlink" title="方法二：归并排序思想（推荐）"></a>方法二：归并排序思想（推荐）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] sortedSquares(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    <span class="type">int</span> <span class="variable">negative</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 找到负数与非负数的分界线</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            negative = i;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>, i = negative, j = negative + <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 归并两个有序子数组</span></span><br><span class="line">    <span class="keyword">while</span> (i &gt;= <span class="number">0</span> || j &lt; n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 负数部分已处理完，直接添加正数部分</span></span><br><span class="line">            ans[index] = nums[j] * nums[j];</span><br><span class="line">            ++j;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (j == n) &#123;</span><br><span class="line">            <span class="comment">// 正数部分已处理完，直接添加负数部分</span></span><br><span class="line">            ans[index] = nums[i] * nums[i];</span><br><span class="line">            --i;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] * nums[i] &lt; nums[j] * nums[j]) &#123;</span><br><span class="line">            <span class="comment">// 负数平方更小，选择负数</span></span><br><span class="line">            ans[index] = nums[i] * nums[i];</span><br><span class="line">            --i;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 正数平方更小，选择正数</span></span><br><span class="line">            ans[index] = nums[j] * nums[j];</span><br><span class="line">            ++j;</span><br><span class="line">        &#125;</span><br><span class="line">        ++index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法三：先平方后排序（不推荐）"><a href="#方法三：先平方后排序（不推荐）" class="headerlink" title="方法三：先平方后排序（不推荐）"></a>方法三：先平方后排序（不推荐）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] sortedSquares(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="comment">// 先计算所有元素的平方</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        nums[i] = nums[i] * nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 然后排序</span></span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法比较"><a href="#方法比较" class="headerlink" title="方法比较"></a>方法比较</h2><table>
+<thead>
+<tr>
+<th>方面</th>
+<th>双指针方法</th>
+<th>归并排序思想</th>
+<th>先平方后排序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>时间复杂度</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+<td>$O(n \log n)$</td>
+</tr>
+<tr>
+<td>空间复杂度</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>高效，代码简洁</td>
+<td>更好地利用数组特性，逻辑清晰</td>
+<td>实现简单</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>需要额外空间</td>
+<td>需要额外空间，代码稍复杂</td>
+<td>时间复杂度较高</td>
+</tr>
+<tr>
+<td>推荐度</td>
+<td>★★★★★</td>
+<td>★★★★☆</td>
+<td>★★☆☆☆</td>
+</tr>
+</tbody></table>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p><strong>双指针方法：</strong> $O(n)$</p>
+<ul>
+<li>每个元素只被访问一次</li>
+<li>总共进行 $n$ 次比较和赋值操作</li>
+</ul>
+<p><strong>归并排序思想：</strong> $O(n)$</p>
+<ul>
+<li>找分界线：$O(n)$</li>
+<li>归并过程：$O(n)$</li>
+<li>总体：$O(n)$</li>
+</ul>
+<p><strong>先平方后排序：</strong> $O(n \log n)$</p>
+<ul>
+<li>平方操作：$O(n)$</li>
+<li>排序操作：$O(n \log n)$</li>
+<li>总体：$O(n \log n)$</li>
+</ul>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p><strong>双指针方法：</strong> $O(n)$</p>
+<ul>
+<li>需要额外的结果数组存储平方后的值</li>
+</ul>
+<p><strong>归并排序思想：</strong> $O(n)$</p>
+<ul>
+<li>需要额外的结果数组存储平方后的值</li>
+</ul>
+<p><strong>先平方后排序：</strong> $O(1)$</p>
+<ul>
+<li>原地修改原数组（如果允许修改原数组）</li>
+</ul>
+<h2 id="关键收获"><a href="#关键收获" class="headerlink" title="关键收获"></a>关键收获</h2><h3 id="核心算法思想"><a href="#核心算法思想" class="headerlink" title="核心算法思想"></a>核心算法思想</h3><ol>
+<li><strong>利用数据特性</strong>：充分利用”数组已排序”这一重要信息</li>
+<li><strong>双指针技巧</strong>：从两端向中间移动，避免不必要的比较</li>
+<li><strong>归并排序思想</strong>：将问题分解为两个有序子数组的归并</li>
+<li><strong>贪心策略</strong>：每次选择当前最大（或最小）的平方值</li>
+</ol>
+<h3 id="常见陷阱"><a href="#常见陷阱" class="headerlink" title="常见陷阱"></a>常见陷阱</h3><ol>
+<li><strong>直接比较平方值</strong>：可能导致整数溢出，应比较绝对值</li>
+<li><strong>忽略边界条件</strong>：确保循环条件 <code>left &lt;= right</code> 正确处理所有情况</li>
+<li><strong>填充顺序错误</strong>：必须从右到左填充结果数组</li>
+</ol>
+<h3 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-sorted-array/">LeetCode 88: 合并两个有序数组</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/">LeetCode 283: 移动零</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">LeetCode 344: 反转字符串</a></li>
+</ul>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><ul>
+<li><strong>信号处理</strong>：对信号数据进行平方运算并保持有序性</li>
+<li><strong>数据分析</strong>：计算方差时需要保持数据的相对顺序</li>
+<li><strong>图形学</strong>：计算距离的平方时保持排序特性</li>
+</ul>
+<hr>
+<p><strong>总结</strong>：这道题是双指针技巧的经典应用，通过利用数组已排序的特性，我们可以在 $O(n)$ 时间内解决问题，避免了 $O(n \log n)$ 的排序开销。关键在于理解平方后的最大值只可能出现在数组的两端，从而设计出高效的双指针算法。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2025/05/22/hello-world/"
+      title="Hello World"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Hello World
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right  disabled "
+     >
+
+    <p class="title-text">
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2025 AnakinLu<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
