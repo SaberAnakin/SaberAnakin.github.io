@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>LeetCode 844 - 比较含退格的字符串（Backspace String Compare） | 老猫识途</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="使用双指针和栈两种方法解决退格字符串比较问题，重点掌握双指针的逆向遍历技巧和栈的模拟退格操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 844 - 比较含退格的字符串（Backspace String Compare）">
+<meta property="og:url" content="https://saberanakin.github.io/2025/10/18/LeetCode-844-%E6%AF%94%E8%BE%83%E5%90%AB%E9%80%80%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="老猫识途">
+<meta property="og:description" content="使用双指针和栈两种方法解决退格字符串比较问题，重点掌握双指针的逆向遍历技巧和栈的模拟退格操作">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-18T01:33:33.000Z">
+<meta property="article:modified_time" content="2025-10-19T01:39:41.605Z">
+<meta property="article:author" content="AnakinLu">
+<meta property="article:tag" content="双指针">
+<meta property="article:tag" content="Easy">
+<meta property="article:tag" content="面试经典150">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="栈">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="老猫识途" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/images/banner5.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="  ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>老猫识途 </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/images/ask.jpg></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">AnakinLu </div>
+      <div class="dot"></div>
+      <div class="subtitle">嘿，我在这里 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/SaberAnakin" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Categories</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">
+                算法刷题
+                <div class="category-count">8</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">
+                LeetCode
+                <div class="category-count">8</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/Hot100/">
+                Hot100
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/">
+                面试经典150
+                <div class="category-count">6</div>
+            </a>
+        </div></div></div></div>
+            <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">
+                技术教程
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Hot100/" rel="tag">Hot100</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Medium/" rel="tag">Medium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%99%E4%BD%9C/" rel="tag">写作</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Recent Posts</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2025/10/18/LeetCode-844-%E6%AF%94%E8%BE%83%E5%90%AB%E9%80%80%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="LeetCode 844 - 比较含退格的字符串（Backspace String Compare）" >
+            <div class="recent-link-text">
+              LeetCode 844 - 比较含退格的字符串（Backspace String Compare）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/17/LeetCode-283-%E7%A7%BB%E5%8A%A8%E9%9B%B6/" title="LeetCode 283 - 移动零（Move Zeroes）" >
+            <div class="recent-link-text">
+              LeetCode 283 - 移动零（Move Zeroes）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/16/LeetCode-26-%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" title="LeetCode 26 - 删除有序数组中的重复项（Remove Duplicates from Sorted Array）" >
+            <div class="recent-link-text">
+              LeetCode 26 - 删除有序数组中的重复项（Remove Duplicates from Sorted Array）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/15/LeetCode-27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" title="LeetCode 27 - 移除元素（Remove Element）" >
+            <div class="recent-link-text">
+              LeetCode 27 - 移除元素（Remove Element）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2025/10/14/LeetCode-69-x-%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/" title="LeetCode-69-x 的平方根" >
+            <div class="recent-link-text">
+              LeetCode-69-x 的平方根
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2025/10 ">
+          October 2025 
+          <div class="archive-count">8 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2025/05 ">
+          May 2025 
+          <div class="archive-count">3 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+
+<article id="post-LeetCode-844-比较含退格的字符串" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        LeetCode 844 - 比较含退格的字符串（Backspace String Compare）
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2025-10-18T01:33:33.000Z" itemprop="datePublished">2025-10-18</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/">算法刷题</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/">LeetCode</a>><a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/LeetCode/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/">面试经典150</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            4.9k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="LeetCode-844-比较含退格的字符串"><a href="#LeetCode-844-比较含退格的字符串" class="headerlink" title="LeetCode 844 - 比较含退格的字符串"></a>LeetCode 844 - 比较含退格的字符串</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定 <code>s</code> 和 <code>t</code> 两个字符串，当它们分别被输入到空白的文本编辑器后，如果两者相等，返回 <code>true</code> 。<code>#</code> 代表退格字符。</p>
+<p>注意：如果对空文本输入退格字符，文本继续为空。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;ab#c&quot;, t = &quot;ad#c&quot;</span><br><span class="line">输出：true</span><br><span class="line">解释：s 和 t 都会变成 &quot;ac&quot;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;ab##&quot;, t = &quot;c#d#&quot;</span><br><span class="line">输出：true</span><br><span class="line">解释：s 和 t 都会变成 &quot;&quot;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;a#c&quot;, t = &quot;b&quot;</span><br><span class="line">输出：false</span><br><span class="line">解释：s 会变成 &quot;c&quot;，但 t 仍然是 &quot;b&quot;。</span><br></pre></td></tr></table></figure>
+
+<h3 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h3><ul>
+<li><code>1 &lt;= s.length, t.length &lt;= 200</code></li>
+<li><code>s</code> 和 <code>t</code> 只含有小写字母以及字符 <code>&#39;#&#39;</code></li>
+</ul>
+<h3 id="进阶要求"><a href="#进阶要求" class="headerlink" title="进阶要求"></a>进阶要求</h3><p>你可以用 O(n) 的时间复杂度和 O(1) 的空间复杂度解决该问题吗？</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这道题的核心是<strong>模拟退格操作</strong>，然后比较两个字符串是否相等。有两种主要思路：</p>
+<h3 id="方法一：栈模拟（直观解法）"><a href="#方法一：栈模拟（直观解法）" class="headerlink" title="方法一：栈模拟（直观解法）"></a>方法一：栈模拟（直观解法）</h3><p><strong>核心思想</strong>：使用栈来模拟文本编辑器的行为</p>
+<ul>
+<li>遇到普通字符：入栈</li>
+<li>遇到 <code>#</code>：出栈（如果栈不为空）</li>
+<li>最后比较两个栈的内容</li>
+</ul>
+<h3 id="方法二：双指针逆向遍历（最优解法）"><a href="#方法二：双指针逆向遍历（最优解法）" class="headerlink" title="方法二：双指针逆向遍历（最优解法）"></a>方法二：双指针逆向遍历（最优解法）</h3><p><strong>核心思想</strong>：从后往前遍历，跳过被退格的字符</p>
+<ul>
+<li>维护两个指针分别从两个字符串的末尾开始</li>
+<li>遇到 <code>#</code> 时，跳过下一个有效字符</li>
+<li>比较当前有效字符是否相等</li>
+</ul>
+<h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="栈模拟法"><a href="#栈模拟法" class="headerlink" title="栈模拟法"></a>栈模拟法</h3><ol>
+<li><p><strong>构建有效字符串</strong>：</p>
+<ul>
+<li>遍历字符串，遇到普通字符就加入栈</li>
+<li>遇到 <code>#</code> 就从栈中弹出字符（如果栈不为空）</li>
+</ul>
+</li>
+<li><p><strong>比较结果</strong>：</p>
+<ul>
+<li>将两个栈转换为字符串进行比较</li>
+</ul>
+</li>
+</ol>
+<h3 id="双指针法"><a href="#双指针法" class="headerlink" title="双指针法"></a>双指针法</h3><ol>
+<li><p><strong>逆向遍历</strong>：</p>
+<ul>
+<li>从字符串末尾开始向前遍历</li>
+<li>遇到 <code>#</code> 时，记录需要跳过的字符数量</li>
+</ul>
+</li>
+<li><p><strong>跳过被退格的字符</strong>：</p>
+<ul>
+<li>当 <code>skip</code> 计数大于 0 时，跳过当前字符</li>
+<li>遇到 <code>#</code> 时，<code>skip</code> 计数加 1</li>
+</ul>
+</li>
+<li><p><strong>比较有效字符</strong>：</p>
+<ul>
+<li>找到两个字符串的下一个有效字符进行比较</li>
+</ul>
+</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="方法一：栈模拟"><a href="#方法一：栈模拟" class="headerlink" title="方法一：栈模拟"></a>方法一：栈模拟</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">backspaceCompare</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> buildString(s).equals(buildString(t));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> String <span class="title function_">buildString</span><span class="params">(String str)</span> &#123;</span><br><span class="line">    Stack&lt;Character&gt; stack = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : str.toCharArray()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (c != <span class="string">&#x27;#&#x27;</span>) &#123;</span><br><span class="line">            stack.push(c);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!stack.isEmpty()) &#123;</span><br><span class="line">            stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> String.valueOf(stack);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二：双指针（最优解）"><a href="#方法二：双指针（最优解）" class="headerlink" title="方法二：双指针（最优解）"></a>方法二：双指针（最优解）</h3><h4 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h4><p>双指针方法的核心思想是<strong>从后往前遍历</strong>，这样可以避免处理退格字符的复杂性。当我们从后往前遍历时，遇到 <code>#</code> 就记录需要跳过的字符数量，然后跳过相应数量的字符，直到找到下一个有效字符进行比较。</p>
+<h4 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h4><ol>
+<li><strong>初始化指针</strong>：两个指针分别指向两个字符串的末尾</li>
+<li><strong>逆向遍历</strong>：从右往左遍历两个字符串</li>
+<li><strong>处理退格</strong>：遇到 <code>#</code> 时记录跳过计数，遇到普通字符时根据跳过计数决定是否跳过</li>
+<li><strong>比较字符</strong>：找到两个字符串的下一个有效字符进行比较</li>
+<li><strong>边界处理</strong>：处理字符串长度不同的情况</li>
+</ol>
+<h4 id="详细实现"><a href="#详细实现" class="headerlink" title="详细实现"></a>详细实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">backspaceCompare</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> s.length() - <span class="number">1</span>;  <span class="comment">// s 的指针，从末尾开始</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> t.length() - <span class="number">1</span>;  <span class="comment">// t 的指针，从末尾开始</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 只要还有字符需要处理就继续循环</span></span><br><span class="line">    <span class="keyword">while</span> (i &gt;= <span class="number">0</span> || j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 找到 s 的下一个有效字符</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">skipS</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s.charAt(i) == <span class="string">&#x27;#&#x27;</span>) &#123;</span><br><span class="line">                skipS++;  <span class="comment">// 遇到退格，增加跳过计数</span></span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (skipS &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                skipS--;  <span class="comment">// 跳过当前字符</span></span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;    <span class="comment">// 找到有效字符，跳出循环</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 找到 t 的下一个有效字符</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">skipT</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (t.charAt(j) == <span class="string">&#x27;#&#x27;</span>) &#123;</span><br><span class="line">                skipT++;  <span class="comment">// 遇到退格，增加跳过计数</span></span><br><span class="line">                j--;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (skipT &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                skipT--;  <span class="comment">// 跳过当前字符</span></span><br><span class="line">                j--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;    <span class="comment">// 找到有效字符，跳出循环</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 比较两个有效字符</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 两个字符串都还有字符，比较是否相等</span></span><br><span class="line">            <span class="keyword">if</span> (s.charAt(i) != t.charAt(j)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i &gt;= <span class="number">0</span> || j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 一个字符串已经遍历完，另一个还有字符，不相等</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 移动指针到下一个位置</span></span><br><span class="line">        i--;</span><br><span class="line">        j--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="代码逐步执行样例"><a href="#代码逐步执行样例" class="headerlink" title="代码逐步执行样例"></a>代码逐步执行样例</h4><p>以 <code>s = &quot;ab#c&quot;</code>, <code>t = &quot;ad#c&quot;</code> 为例，详细展示双指针的执行过程：</p>
+<p><strong>初始状态：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;ab#c&quot;  (索引: 0,1,2,3)</span><br><span class="line">t = &quot;ad#c&quot;  (索引: 0,1,2,3)</span><br><span class="line">i = 3, j = 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>第1轮循环：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i = 3, j = 3</span><br><span class="line">s[3] = &#x27;c&#x27;, t[3] = &#x27;c&#x27;</span><br><span class="line">都不是 &#x27;#&#x27;，skipS = 0, skipT = 0</span><br><span class="line">找到有效字符：s[3] = &#x27;c&#x27;, t[3] = &#x27;c&#x27;</span><br><span class="line">比较：&#x27;c&#x27; == &#x27;c&#x27; ✓</span><br><span class="line">i = 2, j = 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>第2轮循环：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">i = 2, j = 2</span><br><span class="line">s[2] = &#x27;#&#x27;, t[2] = &#x27;#&#x27;</span><br><span class="line">都是退格字符：</span><br><span class="line">- s: skipS = 1, i = 1</span><br><span class="line">- t: skipT = 1, j = 1</span><br><span class="line">继续处理：</span><br><span class="line">- s: s[1] = &#x27;b&#x27;, skipS = 1 &gt; 0，跳过，skipS = 0, i = 0</span><br><span class="line">- t: t[1] = &#x27;d&#x27;, skipT = 1 &gt; 0，跳过，skipT = 0, j = 0</span><br><span class="line">继续处理：</span><br><span class="line">- s: s[0] = &#x27;a&#x27;, skipS = 0，找到有效字符 &#x27;a&#x27;</span><br><span class="line">- t: t[0] = &#x27;a&#x27;, skipT = 0，找到有效字符 &#x27;a&#x27;</span><br><span class="line">比较：&#x27;a&#x27; == &#x27;a&#x27; ✓</span><br><span class="line">i = -1, j = -1</span><br></pre></td></tr></table></figure>
+
+<p><strong>第3轮循环：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i = -1, j = -1</span><br><span class="line">i &lt; 0 &amp;&amp; j &lt; 0，循环结束</span><br><span class="line">返回 true</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行过程可视化：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">步骤1: 比较 &#x27;c&#x27; 和 &#x27;c&#x27; → 相等</span><br><span class="line">步骤2: 遇到 &#x27;#&#x27; 和 &#x27;#&#x27; → 跳过下一个字符</span><br><span class="line">步骤3: 跳过 &#x27;b&#x27; 和 &#x27;d&#x27; → 继续向前</span><br><span class="line">步骤4: 比较 &#x27;a&#x27; 和 &#x27;a&#x27; → 相等</span><br><span class="line">结果: 两个字符串都变成 &quot;ac&quot; → 返回 true</span><br></pre></td></tr></table></figure>
+
+<h4 id="边界情况处理"><a href="#边界情况处理" class="headerlink" title="边界情况处理"></a>边界情况处理</h4><p><strong>情况1：全为退格字符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;###&quot;, t = &quot;##&quot;</span><br><span class="line">执行过程：</span><br><span class="line">- s: 跳过所有字符，最终 i = -1</span><br><span class="line">- t: 跳过所有字符，最终 j = -1</span><br><span class="line">- 两个字符串都为空，返回 true</span><br></pre></td></tr></table></figure>
+
+<p><strong>情况2：一个字符串更长</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;a#c&quot;, t = &quot;b&quot;</span><br><span class="line">执行过程：</span><br><span class="line">- 第1轮：比较 &#x27;c&#x27; 和 &#x27;b&#x27; → 不相等，返回 false</span><br></pre></td></tr></table></figure>
+
+<p><strong>情况3：连续退格</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;ab##c&quot;, t = &quot;a#c&quot;</span><br><span class="line">执行过程：</span><br><span class="line">- s: 遇到 &quot;##&quot;，跳过 &quot;b&quot; 和 &quot;a&quot;，有效字符为 &#x27;c&#x27;</span><br><span class="line">- t: 遇到 &quot;#&quot;，跳过 &#x27;a&#x27;，有效字符为 &#x27;c&#x27;</span><br><span class="line">- 比较 &#x27;c&#x27; 和 &#x27;c&#x27; → 相等，返回 true</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行过程示例"><a href="#执行过程示例" class="headerlink" title="执行过程示例"></a>执行过程示例</h3><p>以 <code>s = &quot;ab#c&quot;</code>, <code>t = &quot;ad#c&quot;</code> 为例：</p>
+<p><strong>栈模拟法执行过程：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;ab#c&quot;:</span><br><span class="line">- &#x27;a&#x27; → stack: [&#x27;a&#x27;]</span><br><span class="line">- &#x27;b&#x27; → stack: [&#x27;a&#x27;, &#x27;b&#x27;]  </span><br><span class="line">- &#x27;#&#x27; → stack: [&#x27;a&#x27;] (弹出 &#x27;b&#x27;)</span><br><span class="line">- &#x27;c&#x27; → stack: [&#x27;a&#x27;, &#x27;c&#x27;]</span><br><span class="line">结果: &quot;ac&quot;</span><br><span class="line"></span><br><span class="line">t = &quot;ad#c&quot;:</span><br><span class="line">- &#x27;a&#x27; → stack: [&#x27;a&#x27;]</span><br><span class="line">- &#x27;d&#x27; → stack: [&#x27;a&#x27;, &#x27;d&#x27;]</span><br><span class="line">- &#x27;#&#x27; → stack: [&#x27;a&#x27;] (弹出 &#x27;d&#x27;)</span><br><span class="line">- &#x27;c&#x27; → stack: [&#x27;a&#x27;, &#x27;c&#x27;]</span><br><span class="line">结果: &quot;ac&quot;</span><br><span class="line"></span><br><span class="line">比较: &quot;ac&quot; == &quot;ac&quot; → true</span><br></pre></td></tr></table></figure>
+
+<p><strong>双指针法执行过程：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">初始: i=3, j=3</span><br><span class="line">s[3]=&#x27;c&#x27;, t[3]=&#x27;c&#x27; → 相等，i=2, j=2</span><br><span class="line">s[2]=&#x27;#&#x27;, t[2]=&#x27;#&#x27; → 都是退格，跳过下一个字符</span><br><span class="line">s[1]=&#x27;b&#x27;, t[1]=&#x27;d&#x27; → 被跳过</span><br><span class="line">s[0]=&#x27;a&#x27;, t[0]=&#x27;a&#x27; → 相等</span><br><span class="line">结果: true</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法比较"><a href="#方法比较" class="headerlink" title="方法比较"></a>方法比较</h2><table>
+<thead>
+<tr>
+<th>方面</th>
+<th>栈模拟法</th>
+<th>双指针法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>时间复杂度</td>
+<td>O(n + m)</td>
+<td>O(n + m)</td>
+</tr>
+<tr>
+<td>空间复杂度</td>
+<td>O(n + m)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>思路直观，易于理解</td>
+<td>空间效率高，符合进阶要求</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>需要额外空间</td>
+<td>实现相对复杂</td>
+</tr>
+<tr>
+<td>推荐度</td>
+<td>★★★☆☆</td>
+<td>★★★★★</td>
+</tr>
+</tbody></table>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="栈模拟法-1"><a href="#栈模拟法-1" class="headerlink" title="栈模拟法"></a>栈模拟法</h3><ul>
+<li><strong>时间复杂度</strong>：$O(n + m)$，其中 n 和 m 分别是两个字符串的长度</li>
+<li><strong>空间复杂度</strong>：$O(n + m)$，需要两个栈来存储字符</li>
+</ul>
+<h3 id="双指针法-1"><a href="#双指针法-1" class="headerlink" title="双指针法"></a>双指针法</h3><ul>
+<li><strong>时间复杂度</strong>：$O(n + m)$，每个字符最多被访问一次</li>
+<li><strong>空间复杂度</strong>：$O(1)$，只使用了常数额外空间</li>
+</ul>
+<h2 id="关键收获"><a href="#关键收获" class="headerlink" title="关键收获"></a>关键收获</h2><ol>
+<li><strong>双指针技巧</strong>：当需要从后往前处理字符串时，双指针是很好的选择</li>
+<li><strong>退格模拟</strong>：遇到退格字符时，需要跳过下一个有效字符</li>
+<li><strong>边界处理</strong>：注意处理字符串长度不同的情况</li>
+<li><strong>空间优化</strong>：在满足时间复杂度要求的前提下，尽量优化空间复杂度</li>
+</ol>
+<h3 id="常见陷阱"><a href="#常见陷阱" class="headerlink" title="常见陷阱"></a>常见陷阱</h3><ol>
+<li><strong>空字符串处理</strong>：当字符串全为 <code>#</code> 时，结果应该是空字符串</li>
+<li><strong>指针越界</strong>：确保在访问字符前检查索引是否有效</li>
+<li><strong>跳过逻辑</strong>：正确处理连续的 <code>#</code> 字符</li>
+</ol>
+<h3 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/">LeetCode 1047. 删除字符串中的所有相邻重复项</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string-ii/">LeetCode 1209. 删除字符串中的所有相邻重复项 II</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/make-the-string-great/">LeetCode 1544. 整理字符串</a></li>
+</ul>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2025/10/17/LeetCode-283-%E7%A7%BB%E5%8A%A8%E9%9B%B6/"
+      title="LeetCode 283 - 移动零（Move Zeroes）"
+     >
+
+    <p class="title-text">
+      
+        LeetCode 283 - 移动零（Move Zeroes）
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2025 AnakinLu<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
