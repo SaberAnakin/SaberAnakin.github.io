@@ -14,27 +14,28 @@
   
 
   
-  <title>LeetCode-69-x 的平方根 | 老猫识途</title>
+  <title>LeetCode 209 - 长度最小的子数组（Minimum Size Subarray Sum） | 老猫识途</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="不使用库函数求非负整数 x 的算术平方根，返回向下取整值。给出二分查找与牛顿法两种实现，分析正确性、边界处理与溢出问题，并比较两种方法的优劣与适用场景。">
+  <meta name="description" content="给定正整数数组和目标值，寻找和大于等于 target 的最短连续子数组长度。提供 O(n) 滑动窗口与 O(n log n) 前缀和 + 二分的两种解法，分析边界与复杂度。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-69-x 的平方根">
-<meta property="og:url" content="https://saberanakin.github.io/2025/10/14/LeetCode-69-x-%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/index.html">
+<meta property="og:title" content="LeetCode 209 - 长度最小的子数组（Minimum Size Subarray Sum）">
+<meta property="og:url" content="https://saberanakin.github.io/2025/10/20/LeetCode-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/index.html">
 <meta property="og:site_name" content="老猫识途">
-<meta property="og:description" content="不使用库函数求非负整数 x 的算术平方根，返回向下取整值。给出二分查找与牛顿法两种实现，分析正确性、边界处理与溢出问题，并比较两种方法的优劣与适用场景。">
+<meta property="og:description" content="给定正整数数组和目标值，寻找和大于等于 target 的最短连续子数组长度。提供 O(n) 滑动窗口与 O(n log n) 前缀和 + 二分的两种解法，分析边界与复杂度。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-14T06:05:00.000Z">
-<meta property="article:modified_time" content="2025-10-14T13:36:11.365Z">
+<meta property="article:published_time" content="2025-10-20T02:30:00.000Z">
+<meta property="article:modified_time" content="2025-10-20T13:45:48.679Z">
 <meta property="article:author" content="AnakinLu">
-<meta property="article:tag" content="Easy">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="双指针">
 <meta property="article:tag" content="面试经典150">
 <meta property="article:tag" content="LeetCode">
-<meta property="article:tag" content="二分查找">
-<meta property="article:tag" content="数学">
+<meta property="article:tag" content="滑动窗口">
+<meta property="article:tag" content="Medium">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="老猫识途" type="application/atom+xml">
@@ -270,7 +271,7 @@
        
 
 
-<article id="post-LeetCode-69-x-的平方根" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-LeetCode-209-长度最小的子数组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -283,7 +284,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        LeetCode-69-x 的平方根
+        LeetCode 209 - 长度最小的子数组（Minimum Size Subarray Sum）
       </h1>
     
   
@@ -291,7 +292,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2025-10-14T06:05:00.000Z" itemprop="datePublished">2025-10-14</time>
+  <time class="dt-published" datetime="2025-10-20T02:30:00.000Z" itemprop="datePublished">2025-10-20</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -302,107 +303,165 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.6k words 
+            3.1k words 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Easy/" rel="tag">Easy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Medium/" rel="tag">Medium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150/" rel="tag">面试经典150</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个非负整数 <code>x</code>，计算并返回 <code>x</code> 的算术平方根。由于返回类型是整数，结果只保留整数部分，小数部分将被舍去。不得使用任何内置指数函数和算符，例如 <code>pow(x, 0.5)</code> 或 <code>x ** 0.5</code>。</p>
-<p>示例 1：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 4</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+          <h1 id="LeetCode-209-长度最小的子数组"><a href="#LeetCode-209-长度最小的子数组" class="headerlink" title="LeetCode 209 - 长度最小的子数组"></a>LeetCode 209 - 长度最小的子数组</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个含有 <code>n</code> 个正整数的数组 <code>nums</code> 和一个正整数 <code>target</code>，找出总和大于等于 <code>target</code> 的最短连续子数组 <code>[l..r]</code> 并返回其长度；若不存在，返回 <code>0</code>。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：target = 7, nums = [2,3,1,2,4,3]</span><br><span class="line">输出：2</span><br><span class="line">解释：子数组 [4,3] 满足条件且长度最短。</span><br></pre></td></tr></table></figure>
 
-<p>示例 2：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 8</span><br><span class="line">输出：2</span><br><span class="line">解释：8 的算术平方根是 2.82842...，由于返回类型是整数，小数部分将被舍去。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：target = 4, nums = [1,4,4]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
 
-<p>约束：<code>0 &lt;= x &lt;= 2^31 - 1</code></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
-<li><strong>关键洞见</strong>：若记答案为 <code>r = ⌊√x⌋</code>，则有 <code>r^2 &lt;= x &lt; (r+1)^2</code>。因此可以在整数域上使用单调性判定。</li>
-<li><strong>方法一（二分查找，详解）</strong>：利用单调性在整数区间上二分定位最大 <code>r</code> 使得 <code>r^2 &lt;= x</code>。</li>
-<li><strong>方法二（牛顿迭代）</strong>：迭代公式 <code>r_&#123;k+1&#125; = (r_k + x / r_k) / 2</code> 收敛很快，取整数部分即可。</li>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：target = 11, nums = [1,1,1,1,1,1,1,1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><ul>
+<li><code>1 &lt;= target &lt;= 1e9</code></li>
+<li><code>1 &lt;= nums.length &lt;= 1e5</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 1e4</code></li>
 </ul>
-<h2 id="二分法详解（不变量、边界与正确性）"><a href="#二分法详解（不变量、边界与正确性）" class="headerlink" title="二分法详解（不变量、边界与正确性）"></a>二分法详解（不变量、边界与正确性）</h2><ol>
-<li><strong>区间定义</strong>：使用左闭右闭区间 <code>[left, right]</code>，含义为“答案 <code>r</code> 一定在该区间内”。</li>
-<li><strong>初始化</strong>：<code>left = 0</code>，<code>right = x</code>（也可用更紧上界 <code>x / 2 + 1</code>，当 <code>x &gt;= 2</code> 时必成立）。</li>
-<li><strong>不变量</strong>：每轮迭代后，<code>r</code> 仍在 <code>[left, right]</code>，且区间严格收缩。</li>
-<li><strong>中点计算</strong>：<code>mid = left + ((right - left) &gt;&gt; 1)</code>，避免 <code>left + right</code> 直接相加导致溢出。</li>
-<li><strong>比较与缩小区间</strong>：<ul>
-<li>若 <code>(long)mid * mid &lt; x</code>，说明 <code>mid</code> 偏小，目标在右侧，更新 <code>left = mid + 1</code>。</li>
-<li>若 <code>(long)mid * mid &gt; x</code>，说明 <code>mid</code> 偏大，目标在左侧，更新 <code>right = mid - 1</code>。</li>
-<li>若相等，直接返回 <code>mid</code>。</li>
-</ul>
-</li>
-<li><strong>终止与返回</strong>：循环以 <code>left &gt; right</code> 终止，此时必有 <code>right^2 &lt;= x &lt; left^2</code>，因此返回 <code>right</code> 即为 <code>⌊√x⌋</code>。</li>
-<li><strong>溢出处理</strong>：比较平方前将 <code>mid</code> 提升为 <code>long</code> 再相乘，避免 <code>int</code> 乘法溢出导致的错误判定。</li>
-<li><strong>特殊值</strong>：<code>x ∈ &#123;0,1&#125;</code> 时流程自然成立；如需微优化可在开头直接返回 <code>x</code>。</li>
+<p>由于元素均为正数，可用单调移动的滑动窗口；也可以用前缀和 + 二分实现 <code>O(n log n)</code>。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="方法一：滑动窗口（双指针，O-n-）"><a href="#方法一：滑动窗口（双指针，O-n-）" class="headerlink" title="方法一：滑动窗口（双指针，O(n)）"></a>方法一：滑动窗口（双指针，O(n)）</h3><p><strong>关键洞见</strong>：<code>nums[i] &gt; 0</code>，右指针右移使窗口和单调不减；当窗口和 <code>&gt;= target</code> 时，左指针尽量右移缩小窗口。</p>
+<p>算法步骤：</p>
+<ol>
+<li>维护窗口 <code>[left, right]</code> 及窗口和 <code>windowSum</code>。</li>
+<li>右指针向右扩张，加上 <code>nums[right]</code>。</li>
+<li>当 <code>windowSum &gt;= target</code> 时，不断右移 <code>left</code> 缩小窗口并更新最短长度。</li>
+<li>遍历结束返回答案，若未更新则为 <code>0</code>。</li>
 </ol>
-<h3 id="二分的本质：在单调布尔函数上找“边界”"><a href="#二分的本质：在单调布尔函数上找“边界”" class="headerlink" title="二分的本质：在单调布尔函数上找“边界”"></a>二分的本质：在单调布尔函数上找“边界”</h3><p>把问题抽象为布尔谓词 <code>P(m): m^2 &lt;= x</code>。显然 <code>P(m)</code> 关于 <code>m</code> 是单调的：当 <code>m</code> 增大到超过 <code>⌊√x⌋</code> 后，<code>P(m)</code> 从真变假。</p>
+<p>边界与细节：</p>
 <ul>
-<li>目标就是找到“真到假”的分界点：最大的 <code>m</code> 使 <code>P(m)</code> 为真。</li>
-<li>这正是二分查找在单调布尔数组上的“上界”问题（max-true）。</li>
+<li>因为均为正数，缩窗不会错过最优解；</li>
+<li>使用 <code>Integer.MAX_VALUE</code> 记录答案初值；</li>
+<li>注意返回 <code>0</code> 的情形。</li>
 </ul>
-<p>因此，模板可表述为：在 <code>[0, x]</code> 上找最大 <code>m</code> 使 <code>P(m)</code> 为真；当循环结束，<code>right</code> 指向 max-true，<code>left</code> 指向 min-false。</p>
-<h3 id="形式化不变量与正确性（为什么返回-right）"><a href="#形式化不变量与正确性（为什么返回-right）" class="headerlink" title="形式化不变量与正确性（为什么返回 right）"></a>形式化不变量与正确性（为什么返回 right）</h3><ul>
-<li>循环保持：<code>I: right</code> 始终满足 <code>P(right)</code>，<code>left</code> 始终不满足 <code>P(left-1)</code>（或说 <code>left</code> 是第一个可能满足的位置）。</li>
-<li>当 <code>P(mid)</code> 为真时，<code>mid</code> 及其左侧都为真，最大真值不在 <code>mid</code> 左边，故令 <code>left = mid + 1</code> 不会丢失 max-true。</li>
-<li>当 <code>P(mid)</code> 为假时，<code>mid</code> 及其右侧都为假，最大真值在 <code>mid</code> 左边，故令 <code>right = mid - 1</code> 保留所有可能答案。</li>
-<li>终止条件 <code>left = right + 1</code>，结合不变量推出：<code>right</code> 为 max-true，<code>left</code> 为 min-false，结论即 <code>right^2 &lt;= x &lt; left^2</code>。</li>
+<h4 id="为什么缩窗是安全的（正确性要点）"><a href="#为什么缩窗是安全的（正确性要点）" class="headerlink" title="为什么缩窗是安全的（正确性要点）"></a>为什么缩窗是安全的（正确性要点）</h4><ul>
+<li>不变式：每一步都维护当前窗口和 <code>windowSum = sum(nums[left..right])</code>，且窗口始终合法（<code>left &lt;= right + 1</code>）。</li>
+<li>单调性：元素为正 ⇒ 当右移 <code>right</code> 时，<code>windowSum</code> 非减；当右移 <code>left</code> 时，<code>windowSum</code> 严格减。</li>
+<li>决策准则：一旦 <code>windowSum &gt;= target</code>，继续扩大窗口只会使长度更大，故应尽量右移 <code>left</code> 缩短长度，直到再次小于 <code>target</code> 为止。此过程不会跳过任何更短可行解，因为任何包含更靠左元素的窗口都不可能更短。</li>
 </ul>
-<h3 id="等价谓词与比较技巧（避免乘法溢出）"><a href="#等价谓词与比较技巧（避免乘法溢出）" class="headerlink" title="等价谓词与比较技巧（避免乘法溢出）"></a>等价谓词与比较技巧（避免乘法溢出）</h3><ul>
-<li>本文实现用 <code>(long)mid * mid</code> 安全比较。</li>
-<li>另一种常见写法是用除法比较：<code>mid &lt;= x / mid</code> 等价于 <code>mid * mid &lt;= x</code>，可避免乘法溢出（但需要注意 <code>x / mid</code> 的整除性质以及 <code>mid != 0</code>）。</li>
+<h4 id="手把手执行示例（target-7-nums-2-3-1-2-4-3-）"><a href="#手把手执行示例（target-7-nums-2-3-1-2-4-3-）" class="headerlink" title="手把手执行示例（target &#x3D; 7, nums &#x3D; [2,3,1,2,4,3]）"></a>手把手执行示例（target &#x3D; 7, nums &#x3D; [2,3,1,2,4,3]）</h4><p>记法：<code>[left..right]</code> 为当前窗口，<code>ans</code> 为最短长度。</p>
+<table>
+<thead>
+<tr>
+<th>step</th>
+<th>right 加入</th>
+<th>window 前</th>
+<th>window 后</th>
+<th>缩窗动作</th>
+<th>ans 更新</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>+2</td>
+<td>[] sum&#x3D;0</td>
+<td>[0..0] sum&#x3D;2</td>
+<td>无</td>
+<td>-</td>
+</tr>
+<tr>
+<td>2</td>
+<td>+3</td>
+<td>[0..0] 2</td>
+<td>[0..1] 5</td>
+<td>无</td>
+<td>-</td>
+</tr>
+<tr>
+<td>3</td>
+<td>+1</td>
+<td>[0..1] 5</td>
+<td>[0..2] 6</td>
+<td>无</td>
+<td>-</td>
+</tr>
+<tr>
+<td>4</td>
+<td>+2</td>
+<td>[0..2] 6</td>
+<td>[0..3] 8</td>
+<td>sum&gt;&#x3D;7，缩窗：去掉2 → [1..3] sum&#x3D;6</td>
+<td>ans&#x3D;3 (len&#x3D;4→缩后3)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>+4</td>
+<td>[1..3] 6</td>
+<td>[1..4] 10</td>
+<td>sum&gt;&#x3D;7，缩窗：去掉3 → [2..4] 7 → ans&#x3D;min(3,3)&#x3D;3，继续缩：去掉1 → [3..4] 6</td>
+<td>ans 仍为 3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>+3</td>
+<td>[3..4] 6</td>
+<td>[3..5] 9</td>
+<td>sum&gt;&#x3D;7，缩窗：去掉2 → [4..5] 7 → ans&#x3D;min(3,2)&#x3D;2，继续缩：去掉4 → [5..5] 3</td>
+<td>ans&#x3D;2</td>
+</tr>
+</tbody></table>
+<p>最终答案为 2，对应窗口 <code>[4,3]</code>（索引 <code>[4..5]</code>）。可以看到，每次达到阈值后尽可能缩窗，能及时发现更短长度。</p>
+<h4 id="常见陷阱与排错"><a href="#常见陷阱与排错" class="headerlink" title="常见陷阱与排错"></a>常见陷阱与排错</h4><ul>
+<li>忘记在 <code>while (windowSum &gt;= target)</code> 内更新 <code>ans</code> 再缩窗，可能错过更短长度。</li>
+<li>将 <code>while</code> 写成 <code>if</code>，会少做多次缩窗，得到非最优长度。</li>
+<li>误用负数或零元素时的滑动窗口模板。本题依赖“正数”保证单调性，若允许负数，需要改用前缀和 + 有序结构的思路。</li>
 </ul>
-<h3 id="常见陷阱与反例"><a href="#常见陷阱与反例" class="headerlink" title="常见陷阱与反例"></a>常见陷阱与反例</h3><ol>
-<li>误返回 <code>left</code>：循环结束后 <code>left</code> 指向第一个使 <code>P(left)</code> 为假的位置，返回它会比正确答案大 1。</li>
-<li>右边界更新错误：在左闭右闭区间中，<code>P(mid)</code> 为假时必须 <code>right = mid - 1</code>，若写成 <code>right = mid</code> 会导致死循环或区间不收缩。</li>
-<li>中点取值与循环条件不匹配：左闭右闭应配合 <code>while (left &lt;= right)</code>；若误用 <code>left &lt; right</code> 可能漏解或死循环。</li>
-</ol>
-<h3 id="执行示例（x-8）"><a href="#执行示例（x-8）" class="headerlink" title="执行示例（x &#x3D; 8）"></a>执行示例（x &#x3D; 8）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">初始：left = 0, right = 8</span><br><span class="line"></span><br><span class="line">第一轮：mid = 4, 4^2 = 16 &gt; 8 → right = 3</span><br><span class="line">第二轮：mid = 1, 1^2 = 1  &lt; 8 → left = 2</span><br><span class="line">第三轮：mid = 2, 2^2 = 4  &lt; 8 → left = 3</span><br><span class="line">第四轮：mid = 3, 3^2 = 9  &gt; 8 → right = 2</span><br><span class="line"></span><br><span class="line">结束：left = 3, right = 2（left &gt; right）→ 返回 right = 2</span><br></pre></td></tr></table></figure>
+<h3 id="方法二：前缀和-二分（O-n-log-n-）"><a href="#方法二：前缀和-二分（O-n-log-n-）" class="headerlink" title="方法二：前缀和 + 二分（O(n log n)）"></a>方法二：前缀和 + 二分（O(n log n)）</h3><p>构造前缀和 <code>pre[i]</code> 表示前 <code>i</code> 个元素之和，<code>pre[0]=0</code>。对每个 <code>i</code>，我们希望找到最小的 <code>j &lt; i</code> 使得 <code>pre[i] - pre[j] &gt;= target</code>，等价于 <code>pre[j] &lt;= pre[i] - target</code>。由于前缀和严格递增（元素均为正），可对 <code>pre</code> 做二分查找满足条件的最右 <code>j</code>。</p>
+<p>实现要点：</p>
+<ul>
+<li>维护长度为 <code>n+1</code> 的前缀和数组；</li>
+<li>对每个 <code>i</code>，在 <code>pre[0..i]</code> 上二分 <code>pre[i] - target</code> 的上界位置；</li>
+<li>取最短长度 <code>i - j</code> 更新答案。</li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="Java-滑动窗口（O-n-）"><a href="#Java-滑动窗口（O-n-）" class="headerlink" title="Java - 滑动窗口（O(n)）"></a>Java - 滑动窗口（O(n)）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minSubArrayLen</span><span class="params">(<span class="type">int</span> target, <span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">windowSum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">answer</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> <span class="number">0</span>; right &lt; n; right++) &#123;</span><br><span class="line">        windowSum += nums[right];</span><br><span class="line">        <span class="keyword">while</span> (windowSum &gt;= target) &#123;</span><br><span class="line">            answer = Math.min(answer, right - left + <span class="number">1</span>);</span><br><span class="line">            windowSum -= nums[left++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> answer == Integer.MAX_VALUE ? <span class="number">0</span> : answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="解法一：二分查找（你的实现）"><a href="#解法一：二分查找（你的实现）" class="headerlink" title="解法一：二分查找（你的实现）"></a>解法一：二分查找（你的实现）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">mySqrt</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="type">int</span> mid;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = x;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            mid = left +((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> ((<span class="type">long</span>)mid * mid &lt; x)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>((<span class="type">long</span>)mid * mid &gt; x)</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="解法二：牛顿迭代（常数更优）"><a href="#解法二：牛顿迭代（常数更优）" class="headerlink" title="解法二：牛顿迭代（常数更优）"></a>解法二：牛顿迭代（常数更优）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SolutionNewton</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">mySqrt</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">2</span>) <span class="keyword">return</span> x;</span><br><span class="line">        <span class="type">long</span> <span class="variable">r</span> <span class="operator">=</span> x; <span class="comment">// 用 long 防止中间计算溢出</span></span><br><span class="line">        <span class="keyword">while</span> (r * r &gt; x) &#123;</span><br><span class="line">            r = (r + x / r) &gt;&gt; <span class="number">1</span>; <span class="comment">// 等价于 (r + x / r) / 2</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="type">int</span>) r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Java-前缀和-二分（O-n-log-n-）"><a href="#Java-前缀和-二分（O-n-log-n-）" class="headerlink" title="Java - 前缀和 + 二分（O(n log n)）"></a>Java - 前缀和 + 二分（O(n log n)）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minSubArrayLenBinary</span><span class="params">(<span class="type">int</span> target, <span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    <span class="type">long</span>[] pre = <span class="keyword">new</span> <span class="title class_">long</span>[n + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        pre[i] = pre[i - <span class="number">1</span>] + nums[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">answer</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">need</span> <span class="operator">=</span> pre[i] - target; <span class="comment">// 寻找最大的 j 使 pre[j] &lt;= need</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> upperBound(pre, <span class="number">0</span>, i, need) - <span class="number">1</span>; <span class="comment">// 上界-1 即为满足条件的最右 j</span></span><br><span class="line">        <span class="keyword">if</span> (j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            answer = Math.min(answer, i - j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> answer == Integer.MAX_VALUE ? <span class="number">0</span> : answer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回在 pre[l..r) 中第一个 &gt; x 的下标</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">upperBound</span><span class="params">(<span class="type">long</span>[] pre, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">long</span> x)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> l, right = r; <span class="comment">// [left, right)</span></span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (pre[mid] &lt;= x) left = mid + <span class="number">1</span>; <span class="keyword">else</span> right = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="方法比较"><a href="#方法比较" class="headerlink" title="方法比较"></a>方法比较</h2><table>
 <thead>
 <tr>
-<th align="left">方面</th>
-<th align="left">二分查找</th>
-<th align="left">牛顿迭代</th>
+<th>方面</th>
+<th>滑动窗口</th>
+<th>前缀和 + 二分</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">时间复杂度</td>
-<td align="left"><code>O(log x)</code></td>
-<td align="left">迭代次数很少，实际常数更优</td>
+<td>时间复杂度</td>
+<td>$O(n)$</td>
+<td>$O(n \log n)$</td>
 </tr>
 <tr>
-<td align="left">空间复杂度</td>
-<td align="left"><code>O(1)</code></td>
-<td align="left"><code>O(1)</code></td>
+<td>空间复杂度</td>
+<td>$O(1)$</td>
+<td>$O(n)$</td>
 </tr>
 <tr>
-<td align="left">实现难度</td>
-<td align="left">简单、边界清晰</td>
-<td align="left">略高，需注意收敛与溢出</td>
+<td>适用前提</td>
+<td>元素为正</td>
+<td>元素为正</td>
 </tr>
 <tr>
-<td align="left">稳定性</td>
-<td align="left">边界与正确性易于证明</td>
-<td align="left">对初始值不敏感，但要用 long</td>
+<td>实现难度</td>
+<td>低</td>
+<td>中</td>
 </tr>
 </tbody></table>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><ul>
-<li>二分查找：时间 <code>O(log x)</code>，空间 <code>O(1)</code>。</li>
-<li>牛顿迭代：每次迭代为常数开销，通常 5～7 次内收敛到整数根，空间 <code>O(1)</code>。</li>
+<li>滑动窗口：每个元素最多进出窗口一次，总时间 $O(n)$，常数额外空间 $O(1)$。</li>
+<li>前缀和 + 二分：构建前缀和 $O(n)$，每个位置一次二分 $O(\log n)$，总 $O(n\log n)$，空间 $O(n)$。</li>
 </ul>
 <h2 id="关键收获"><a href="#关键收获" class="headerlink" title="关键收获"></a>关键收获</h2><ul>
-<li>在整数域下通过单调性与不等式界定目标区间，是处理“向下取整”的常见套路。</li>
-<li>计算平方时建议使用更宽类型（如 <code>long</code>）以避免溢出带来的比较错误。</li>
-<li>牛顿法在需要高效近似开方时非常实用，注意以整数形式收敛并保证向下取整性质。</li>
+<li>元素全为正数是滑动窗口正确性的根本保障；</li>
+<li>二分法依赖前缀和的单调性，注意使用上界定位最右可行 <code>j</code>；</li>
+<li>面对“最短&#x2F;最小长度的连续子数组且和有下界”的问题，优先考虑滑动窗口。</li>
 </ul>
 
         
@@ -416,27 +475,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2025/10/15/LeetCode-27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/"
-      title="LeetCode 27 - 移除元素（Remove Element）"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        LeetCode 27 - 移除元素（Remove Element）
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2025/10/13/LeetCode-34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/"
-      title="LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置"
+      href="/2025/10/19/LeetCode-977-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9/"
+      title="LeetCode 977 - 有序数组的平方（Squares of a Sorted Array）"
      >
 
     <p class="title-text">
       
-        LeetCode 34 - 在排序数组中查找元素的第一个和最后一个位置
+        LeetCode 977 - 有序数组的平方（Squares of a Sorted Array）
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
