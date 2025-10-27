@@ -20,21 +20,21 @@
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="使用滑动窗口算法解决水果成篮问题，找到最多包含两种不同水果类型的最大连续子数组，时间复杂度O(n)，空间复杂度O(1)">
+  <meta name="description" content="使用滑动窗口算法解决水果成篮问题，提供HashMap和哈希数组两种实现方法，找到最多包含两种不同水果类型的最大连续子数组，时间复杂度O(n)，空间复杂度O(k)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 904 - 水果成篮（Fruit Into Baskets）">
-<meta property="og:url" content="https://saberanakin.github.io/2025/01/27/LeetCode-904-%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE/index.html">
+<meta property="og:url" content="https://saberanakin.github.io/2025/10/27/LeetCode-904-%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE/index.html">
 <meta property="og:site_name" content="老猫识途">
-<meta property="og:description" content="使用滑动窗口算法解决水果成篮问题，找到最多包含两种不同水果类型的最大连续子数组，时间复杂度O(n)，空间复杂度O(1)">
+<meta property="og:description" content="使用滑动窗口算法解决水果成篮问题，提供HashMap和哈希数组两种实现方法，找到最多包含两种不同水果类型的最大连续子数组，时间复杂度O(n)，空间复杂度O(k)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-01-27T02:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-21T14:05:30.192Z">
+<meta property="article:published_time" content="2025-10-27T02:30:00.000Z">
+<meta property="article:modified_time" content="2025-10-27T14:01:34.583Z">
 <meta property="article:author" content="AnakinLu">
 <meta property="article:tag" content="双指针">
-<meta property="article:tag" content="面试经典150">
-<meta property="article:tag" content="LeetCode">
 <meta property="article:tag" content="滑动窗口">
 <meta property="article:tag" content="Medium">
+<meta property="article:tag" content="面试经典150">
+<meta property="article:tag" content="LeetCode">
 <meta property="article:tag" content="哈希表">
 <meta name="twitter:card" content="summary">
   
@@ -208,6 +208,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2025/10/27/LeetCode-904-%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE/" title="LeetCode 904 - 水果成篮（Fruit Into Baskets）" >
+            <div class="recent-link-text">
+              LeetCode 904 - 水果成篮（Fruit Into Baskets）
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2025/10/20/LeetCode-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/" title="LeetCode 209 - 长度最小的子数组（Minimum Size Subarray Sum）" >
             <div class="recent-link-text">
               LeetCode 209 - 长度最小的子数组（Minimum Size Subarray Sum）
@@ -232,12 +238,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2025/10/16/LeetCode-26-%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" title="LeetCode 26 - 删除有序数组中的重复项（Remove Duplicates from Sorted Array）" >
-            <div class="recent-link-text">
-              LeetCode 26 - 删除有序数组中的重复项（Remove Duplicates from Sorted Array）
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -251,17 +251,12 @@
       
         <a class="archive-link" href="/archives/2025/10 ">
           October 2025 
-          <div class="archive-count">10 </div>
+          <div class="archive-count">11 </div>
         </a>
       
         <a class="archive-link" href="/archives/2025/05 ">
           May 2025 
           <div class="archive-count">3 </div>
-        </a>
-      
-        <a class="archive-link" href="/archives/2025/01 ">
-          January 2025 
-          <div class="archive-count">1 </div>
         </a>
       
     </div>
@@ -297,7 +292,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2025-01-27T02:30:00.000Z" itemprop="datePublished">2025-01-27</time>
+  <time class="dt-published" datetime="2025-10-27T02:30:00.000Z" itemprop="datePublished">2025-10-27</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -308,7 +303,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.3k words 
+            6.3k words 
           </div>
         </div>
         
@@ -350,10 +345,42 @@
 <li><strong>当出现第三种水果类型时</strong>，收缩左边界直到窗口重新满足条件</li>
 <li><strong>记录最大窗口大小</strong></li>
 </ol>
-<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><ol>
+<h3 id="实现方法对比"><a href="#实现方法对比" class="headerlink" title="实现方法对比"></a>实现方法对比</h3><p>题目提供了两种实现方式：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>数据结构</th>
+<th>空间复杂度</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>方法一</strong></td>
+<td>HashMap</td>
+<td>O(1)</td>
+<td>代码简洁，只需维护实际出现的水果类型</td>
+<td>哈希表操作有常数因子开销</td>
+</tr>
+<tr>
+<td><strong>方法二</strong></td>
+<td>哈希数组</td>
+<td>O(n)</td>
+<td>访问速度快，适合已知值域范围的情况</td>
+<td>需要预分配数组空间</td>
+</tr>
+</tbody></table>
+<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><h4 id="方法一：HashMap-实现"><a href="#方法一：HashMap-实现" class="headerlink" title="方法一：HashMap 实现"></a>方法一：HashMap 实现</h4><ol>
 <li><strong>初始化</strong>：使用 HashMap 记录当前窗口中每种水果的数量</li>
 <li><strong>扩展窗口</strong>：右指针向右移动，将新水果加入窗口</li>
 <li><strong>收缩窗口</strong>：当水果种类超过 2 种时，左指针向右移动，移除水果</li>
+<li><strong>更新结果</strong>：记录当前窗口大小，取最大值</li>
+</ol>
+<h4 id="方法二：哈希数组实现"><a href="#方法二：哈希数组实现" class="headerlink" title="方法二：哈希数组实现"></a>方法二：哈希数组实现</h4><ol>
+<li><strong>初始化</strong>：使用数组 <code>window</code> 作为哈希表，索引为水果类型，值为出现次数</li>
+<li><strong>扩展窗口</strong>：右指针向右移动，更新 <code>window[fruits[right]]</code> 计数</li>
+<li><strong>收缩窗口</strong>：当水果种类超过 2 种时，左指针向右移动，减少对应水果计数</li>
 <li><strong>更新结果</strong>：记录当前窗口大小，取最大值</li>
 </ol>
 <h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="滑动窗口维护"><a href="#滑动窗口维护" class="headerlink" title="滑动窗口维护"></a>滑动窗口维护</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 HashMap 记录当前窗口中每种水果的数量</span></span><br><span class="line">Map&lt;Integer, Integer&gt; fruitCount = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑动窗口的左右指针</span></span><br><span class="line"><span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">maxFruits</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 扩展右边界</span></span><br><span class="line"><span class="keyword">while</span> (right &lt; fruits.length) &#123;</span><br><span class="line">    <span class="comment">// 添加当前水果到窗口</span></span><br><span class="line">    fruitCount.put(fruits[right], fruitCount.getOrDefault(fruits[right], <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果水果种类超过2种，收缩左边界</span></span><br><span class="line">    <span class="keyword">while</span> (fruitCount.size() &gt; <span class="number">2</span>) &#123;</span><br><span class="line">        fruitCount.put(fruits[left], fruitCount.get(fruits[left]) - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (fruitCount.get(fruits[left]) == <span class="number">0</span>) &#123;</span><br><span class="line">            fruitCount.remove(fruits[left]);</span><br><span class="line">        &#125;</span><br><span class="line">        left++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 更新最大水果数量</span></span><br><span class="line">    maxFruits = Math.max(maxFruits, right - left + <span class="number">1</span>);</span><br><span class="line">    right++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -364,36 +391,224 @@
 <li><strong>移除水果</strong>：当某种水果数量为 0 时，从 HashMap 中完全移除</li>
 <li><strong>窗口大小计算</strong>：<code>right - left + 1</code></li>
 </ol>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">totalFruit</span><span class="params">(<span class="type">int</span>[] fruits)</span> &#123;</span><br><span class="line">        <span class="comment">// 使用 HashMap 记录当前窗口中每种水果的数量</span></span><br><span class="line">        Map&lt;Integer, Integer&gt; fruitCount = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;  <span class="comment">// 滑动窗口左边界</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">maxFruits</span> <span class="operator">=</span> <span class="number">0</span>;  <span class="comment">// 最大水果数量</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历数组，right 作为滑动窗口右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> <span class="number">0</span>; right &lt; fruits.length; right++) &#123;</span><br><span class="line">            <span class="comment">// 将当前水果加入窗口</span></span><br><span class="line">            fruitCount.put(fruits[right], fruitCount.getOrDefault(fruits[right], <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 如果窗口中的水果种类超过2种，需要收缩左边界</span></span><br><span class="line">            <span class="keyword">while</span> (fruitCount.size() &gt; <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="comment">// 移除左边界的水果</span></span><br><span class="line">                fruitCount.put(fruits[left], fruitCount.get(fruits[left]) - <span class="number">1</span>);</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 如果某种水果数量为0，从HashMap中移除</span></span><br><span class="line">                <span class="keyword">if</span> (fruitCount.get(fruits[left]) == <span class="number">0</span>) &#123;</span><br><span class="line">                    fruitCount.remove(fruits[left]);</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                left++;  <span class="comment">// 左边界右移</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 更新最大水果数量</span></span><br><span class="line">            maxFruits = Math.max(maxFruits, right - left + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> maxFruits;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="方法一：HashMap-实现-1"><a href="#方法一：HashMap-实现-1" class="headerlink" title="方法一：HashMap 实现"></a>方法一：HashMap 实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">totalFruit</span><span class="params">(<span class="type">int</span>[] fruits)</span> &#123;</span><br><span class="line">        <span class="comment">// 使用 HashMap 记录当前窗口中每种水果的数量</span></span><br><span class="line">        Map&lt;Integer, Integer&gt; fruitCount = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;  <span class="comment">// 滑动窗口左边界</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">maxFruits</span> <span class="operator">=</span> <span class="number">0</span>;  <span class="comment">// 最大水果数量</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历数组，right 作为滑动窗口右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> <span class="number">0</span>; right &lt; fruits.length; right++) &#123;</span><br><span class="line">            <span class="comment">// 将当前水果加入窗口</span></span><br><span class="line">            fruitCount.put(fruits[right], fruitCount.getOrDefault(fruits[right], <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 如果窗口中的水果种类超过2种，需要收缩左边界</span></span><br><span class="line">            <span class="keyword">while</span> (fruitCount.size() &gt; <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="comment">// 移除左边界的水果</span></span><br><span class="line">                fruitCount.put(fruits[left], fruitCount.get(fruits[left]) - <span class="number">1</span>);</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 如果某种水果数量为0，从HashMap中移除</span></span><br><span class="line">                <span class="keyword">if</span> (fruitCount.get(fruits[left]) == <span class="number">0</span>) &#123;</span><br><span class="line">                    fruitCount.remove(fruits[left]);</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                left++;  <span class="comment">// 左边界右移</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 更新最大水果数量</span></span><br><span class="line">            maxFruits = Math.max(maxFruits, right - left + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> maxFruits;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="执行过程示例"><a href="#执行过程示例" class="headerlink" title="执行过程示例"></a>执行过程示例</h3><p>以 <code>fruits = [1,2,3,2,2]</code> 为例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">初始状态：left=0, right=0, fruitCount=&#123;&#125;, maxFruits=0</span><br><span class="line"></span><br><span class="line">right=0: fruits[0]=1</span><br><span class="line">fruitCount=&#123;1:1&#125;, size=1 &lt;= 2, 窗口大小=1, maxFruits=1</span><br><span class="line"></span><br><span class="line">right=1: fruits[1]=2  </span><br><span class="line">fruitCount=&#123;1:1, 2:1&#125;, size=2 &lt;= 2, 窗口大小=2, maxFruits=2</span><br><span class="line"></span><br><span class="line">right=2: fruits[2]=3</span><br><span class="line">fruitCount=&#123;1:1, 2:1, 3:1&#125;, size=3 &gt; 2, 需要收缩</span><br><span class="line">移除fruits[0]=1: fruitCount=&#123;2:1, 3:1&#125;, left=1</span><br><span class="line">窗口大小=2, maxFruits=2</span><br><span class="line"></span><br><span class="line">right=3: fruits[3]=2</span><br><span class="line">fruitCount=&#123;2:2, 3:1&#125;, size=2 &lt;= 2, 窗口大小=3, maxFruits=3</span><br><span class="line"></span><br><span class="line">right=4: fruits[4]=2</span><br><span class="line">fruitCount=&#123;2:3, 3:1&#125;, size=2 &lt;= 2, 窗口大小=4, maxFruits=4</span><br><span class="line"></span><br><span class="line">最终结果：4</span><br></pre></td></tr></table></figure>
+<h4 id="方法一详细解析"><a href="#方法一详细解析" class="headerlink" title="方法一详细解析"></a>方法一详细解析</h4><p><strong>核心思想</strong>：使用 HashMap 动态维护窗口中水果的计数和种类数</p>
+<p><strong>关键点</strong>：</p>
+<ol>
+<li><strong>HashMap 自动去重</strong>：当某种水果数量减为 0 时，从 HashMap 中移除，<code>size()</code> 会减少</li>
+<li><strong>种类数判断</strong>：通过 <code>fruitCount.size() &gt; 2</code> 判断种类是否超限</li>
+<li><strong>逻辑清晰</strong>：代码直观，易于理解</li>
+</ol>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：O(n)，每个元素最多访问两次</li>
+<li>空间复杂度：O(1)，HashMap 最多存储 3 个键值对</li>
+</ul>
+<hr>
+<h3 id="方法二：哈希数组实现（推荐）"><a href="#方法二：哈希数组实现（推荐）" class="headerlink" title="方法二：哈希数组实现（推荐）"></a>方法二：哈希数组实现（推荐）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">totalFruit</span><span class="params">(<span class="type">int</span>[] fruits)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> fruits.length;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) <span class="keyword">return</span> n; <span class="comment">// 边界处理：数组长度≤2时直接返回</span></span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span>[] window = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">10</span>]; <span class="comment">// 哈希数组：索引为水果类型，值为出现次数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, maxFruits = <span class="number">0</span>, types = <span class="number">0</span>; <span class="comment">// 窗口左指针、结果最大值、当前种类数</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> <span class="number">0</span>; right &lt; n; right++) &#123;</span><br><span class="line">            <span class="comment">// 右指针向右扩展窗口</span></span><br><span class="line">            <span class="keyword">if</span> (window[fruits[right]]++ == <span class="number">0</span>) &#123;</span><br><span class="line">                types++; <span class="comment">// 遇到新种类，种类数+1</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 当种类超限时收缩左边界</span></span><br><span class="line">            <span class="keyword">while</span> (types &gt; <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (--window[fruits[left]] == <span class="number">0</span>) &#123;</span><br><span class="line">                    types--; <span class="comment">// 某种水果数量归零，种类数-1</span></span><br><span class="line">                &#125;</span><br><span class="line">                left++; <span class="comment">// 左指针右移</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 更新最大窗口长度</span></span><br><span class="line">            maxFruits = Math.max(maxFruits, right - left + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxFruits;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ul>
+<h4 id="方法二详细解析"><a href="#方法二详细解析" class="headerlink" title="方法二详细解析"></a>方法二详细解析</h4><p><strong>核心思想</strong>：使用数组模拟哈希表，用数组索引表示水果类型，数组值表示该水果在窗口中的出现次数</p>
+<p><strong>数据结构设计</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] window = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>索引含义</strong>：<code>window[i]</code> 表示水果类型 <code>i</code> 在当前窗口中的出现次数</li>
+<li><strong>大小分配</strong>：根据题目约束 <code>0 &lt;= fruits[i] &lt; fruits.length</code>，分配 <code>n + 10</code> 的大小足够</li>
+<li><strong>初始值</strong>：所有元素初始化为 0</li>
+</ul>
+<p><strong>关键变量</strong>：</p>
+<ul>
+<li><code>types</code>：当前窗口中水果的种类数</li>
+<li><code>left</code>、<code>right</code>：滑动窗口的左右边界</li>
+<li><code>maxFruits</code>：记录的最大窗口长度</li>
+</ul>
+<p><strong>核心逻辑详解</strong>：</p>
+<ol>
+<li><strong>扩展窗口</strong>：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (window[fruits[right]]++ == <span class="number">0</span>) &#123;</span><br><span class="line">    types++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>操作顺序</strong>：<code>window[fruits[right]]++</code> 是后缀自增，先比较再自增</li>
+<li><strong>判断原理</strong>：如果 <code>window[fruits[right]]</code> 在自增前为 0，说明这是新类型的水果，种类数加 1</li>
+<li><strong>示例</strong>：<code>fruits[right] = 1</code>，如果 <code>window[1] == 0</code>，说明类型 1 是新类型，<code>types++</code> 后种类数变为 1</li>
+</ul>
+<ol start="2">
+<li><strong>收缩窗口</strong>：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (types &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (--window[fruits[left]] == <span class="number">0</span>) &#123;</span><br><span class="line">        types--;</span><br><span class="line">    &#125;</span><br><span class="line">    left++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>前缀自减</strong>：<code>--window[fruits[left]]</code> 先自减再比较</li>
+<li><strong>种类数管理</strong>：当某种水果数量归零时，种类数减 1</li>
+<li><strong>窗口移动</strong>：左指针右移，缩小窗口</li>
+</ul>
+<ol start="3">
+<li><strong>更新结果</strong>：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxFruits = Math.max(maxFruits, right - left + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在每次循环中更新最大窗口长度</li>
+</ul>
+<h4 id="方法二的执行过程示例"><a href="#方法二的执行过程示例" class="headerlink" title="方法二的执行过程示例"></a>方法二的执行过程示例</h4><p>以 <code>fruits = [1,2,3,2,2]</code> 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">初始状态：</span><br><span class="line">window = [0, 0, 0, 0, 0] (所有类型计数为0)</span><br><span class="line">left=0, right=0, types=0, maxFruits=0</span><br><span class="line"></span><br><span class="line">right=0: fruits[0]=1</span><br><span class="line">window[1]++，从0变为1，满足 window[1]==0（自增前），types++ → types=1</span><br><span class="line">窗口大小=1, maxFruits=1</span><br><span class="line"></span><br><span class="line">right=1: fruits[1]=2</span><br><span class="line">window[2]++，从0变为1，满足 window[2]==0（自增前），types++ → types=2</span><br><span class="line">窗口大小=2, maxFruits=2</span><br><span class="line"></span><br><span class="line">right=2: fruits[2]=3</span><br><span class="line">window[3]++，从0变为1，满足 window[3]==0（自增前），types++ → types=3</span><br><span class="line">types &gt; 2，需要收缩：</span><br><span class="line">  fruits[0]=1，--window[1]，从1变为0，满足 == 0，types-- → types=2</span><br><span class="line">  窗口大小=2, maxFruits=2</span><br><span class="line"></span><br><span class="line">right=3: fruits[3]=2</span><br><span class="line">window[2]++，从1变为2，不满足 window[2]==0（自增前），types不变</span><br><span class="line">窗口大小=3, maxFruits=3</span><br><span class="line"></span><br><span class="line">right=4: fruits[4]=2</span><br><span class="line">window[2]++，从2变为3，不满足 window[2]==0（自增前），types不变</span><br><span class="line">窗口大小=4, maxFruits=4</span><br><span class="line"></span><br><span class="line">最终结果：4</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二的优势"><a href="#方法二的优势" class="headerlink" title="方法二的优势"></a>方法二的优势</h4><table>
+<thead>
+<tr>
+<th>方面</th>
+<th>优势</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>性能</strong></td>
+<td>数组访问比 HashMap 的哈希计算和冲突处理更快</td>
+</tr>
+<tr>
+<td><strong>内存</strong></td>
+<td>连续内存访问，缓存友好</td>
+</tr>
+<tr>
+<td><strong>代码</strong></td>
+<td>使用位运算思想，代码更紧凑</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>适合值域已知或较小的场景</td>
+</tr>
+</tbody></table>
+<h4 id="方法二的关键技巧"><a href="#方法二的关键技巧" class="headerlink" title="方法二的关键技巧"></a>方法二的关键技巧</h4><ol>
+<li><p><strong>后置自增判断新类型</strong>：</p>
+<ul>
+<li><code>if (window[x]++ == 0)</code> 巧妙地在自增前判断是否为 0</li>
+<li>如果为 0，说明是新类型；否则是已有类型</li>
+</ul>
+</li>
+<li><p><strong>前置自减判断类型归零</strong>：</p>
+<ul>
+<li><code>if (--window[x] == 0)</code> 在自减后判断是否为 0</li>
+<li>如果为 0，说明该类型完全移出窗口</li>
+</ul>
+</li>
+<li><p><strong>边界处理</strong>：</p>
+<ul>
+<li>当 <code>n &lt;= 2</code> 时直接返回，避免不必要的计算</li>
+</ul>
+</li>
+</ol>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：<strong>O(n)</strong>，每个元素最多访问两次（右指针扩展、左指针收缩）</li>
+<li>空间复杂度：<strong>O(n)</strong>，数组大小为 <code>n + 10</code>，空间复杂度为 O(n)</li>
+</ul>
+<h5 id="为什么空间复杂度是-O-n-？"><a href="#为什么空间复杂度是-O-n-？" class="headerlink" title="为什么空间复杂度是 O(n)？"></a>为什么空间复杂度是 O(n)？</h5><p>虽然从实用性角度看，数组是固定大小的，但从渐进复杂度分析：</p>
+<ul>
+<li>数组大小依赖于输入规模 n（尽管是线性的，<code>n + 10</code>）</li>
+<li>在分析大 O 表示法时，<code>n + 10 ∈ O(n)</code></li>
+<li>当 <code>n → ∞</code> 时，空间需求会增长</li>
+</ul>
+<p>实际上，由于题目约束 <code>0 &lt;= fruits[i] &lt; n</code>，我们只需要 <code>n</code> 大小的数组即可。</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="方法一：HashMap-实现-2"><a href="#方法一：HashMap-实现-2" class="headerlink" title="方法一：HashMap 实现"></a>方法一：HashMap 实现</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><ul>
 <li><strong>O(n)</strong>：每个元素最多被访问两次（一次被右指针添加，一次被左指针移除）</li>
 <li>虽然内层有 while 循环，但每个元素最多被处理一次</li>
 </ul>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><ul>
+<h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><ul>
 <li><strong>O(1)</strong>：HashMap 最多存储 3 个键值对（2种水果类型 + 1种新类型）</li>
 <li>空间复杂度与输入规模无关</li>
 </ul>
+<h3 id="方法二：哈希数组实现-1"><a href="#方法二：哈希数组实现-1" class="headerlink" title="方法二：哈希数组实现"></a>方法二：哈希数组实现</h3><h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><ul>
+<li><strong>O(n)</strong>：每个元素最多被访问两次</li>
+<li>右指针遍历整个数组，左指针最多遍历一次</li>
+</ul>
+<h4 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><ul>
+<li><strong>O(n)</strong>：需要 <code>n + 10</code> 大小的数组用于哈希映射</li>
+<li>取决于输入规模，但数组大小是线性的</li>
+</ul>
+<h3 id="方法比较总结"><a href="#方法比较总结" class="headerlink" title="方法比较总结"></a>方法比较总结</h3><table>
+<thead>
+<tr>
+<th>方面</th>
+<th>方法一 (HashMap)</th>
+<th>方法二 (哈希数组)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>时间复杂度</strong></td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><strong>空间复杂度</strong></td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><strong>代码简洁度</strong></td>
+<td>★★★★☆</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>执行效率</strong></td>
+<td>较慢（哈希运算）</td>
+<td>更快（直接索引）</td>
+</tr>
+<tr>
+<td><strong>内存占用</strong></td>
+<td>较少（只存实际出现的类型）</td>
+<td>较多（预分配数组）</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>通用场景</td>
+<td>值域较小且已知</td>
+</tr>
+<tr>
+<td><strong>推荐度</strong></td>
+<td>★★★☆☆</td>
+<td>★★★★★</td>
+</tr>
+</tbody></table>
+<p><strong>总结</strong>：如果值域范围较小（如本题），哈希数组方法在性能和代码清晰度上都有优势。如果值域很大或未知，HashMap 方法更灵活。</p>
 <h2 id="关键收获"><a href="#关键收获" class="headerlink" title="关键收获"></a>关键收获</h2><ol>
 <li><strong>滑动窗口模板</strong>：这是滑动窗口问题的经典应用</li>
-<li><strong>HashMap 的使用</strong>：有效记录窗口中元素的数量和种类</li>
+<li><strong>数据结构选择</strong>：HashMap vs 哈希数组，根据场景选择</li>
 <li><strong>边界处理</strong>：正确处理窗口收缩的条件</li>
 <li><strong>时间复杂度优化</strong>：通过滑动窗口避免暴力解法的时间复杂度</li>
+<li><strong>自增自减技巧</strong>：使用 <code>a++ == 0</code> 和 <code>--a == 0</code> 简化代码逻辑</li>
 </ol>
 <h3 id="常见陷阱"><a href="#常见陷阱" class="headerlink" title="常见陷阱"></a>常见陷阱</h3><ol>
 <li><strong>忘记移除元素</strong>：当窗口收缩时，必须正确移除左边界元素</li>
 <li><strong>HashMap 清理</strong>：当元素数量为 0 时，要从 HashMap 中完全移除</li>
 <li><strong>窗口大小计算</strong>：使用 <code>right - left + 1</code> 计算当前窗口大小</li>
+<li><strong>种类数管理</strong>：正确跟踪窗口中的种类数，确保逻辑一致</li>
+<li><strong>数组大小</strong>：使用哈希数组时，确保数组大小足够容纳所有可能的值</li>
 </ol>
 <h3 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">LeetCode 3: 无重复字符的最长子串</a></li>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/">LeetCode 76: 最小覆盖子串</a></li>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">LeetCode 209: 长度最小的子数组</a></li>
 </ul>
-<p>这道题是滑动窗口算法的经典应用，掌握其解法对于解决类似的子数组问题非常有帮助。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这道题是滑动窗口算法的经典应用，题目要求我们找到最多包含两种不同元素的最长连续子数组。</p>
+<h3 id="核心要点"><a href="#核心要点" class="headerlink" title="核心要点"></a>核心要点</h3><ol>
+<li><strong>滑动窗口思想</strong>：使用双指针维护一个满足条件的窗口</li>
+<li><strong>两种实现方式</strong>：<ul>
+<li><strong>HashMap</strong>：适用于通用场景，空间复杂度 O(1)</li>
+<li><strong>哈希数组</strong>：适用于值域较小的情况，执行效率更高</li>
+</ul>
+</li>
+<li><strong>关键技巧</strong>：<ul>
+<li>使用 <code>types</code> 变量跟踪窗口中的种类数</li>
+<li>利用自增自减运算符简化判断逻辑</li>
+<li>正确处理窗口的扩展和收缩</li>
+</ul>
+</li>
+</ol>
+<h3 id="学习价值"><a href="#学习价值" class="headerlink" title="学习价值"></a>学习价值</h3><p>这道题不仅考查滑动窗口的基本应用，还展示了在不同数据结构选择上的权衡。理解这两种实现方式有助于：</p>
+<ul>
+<li>掌握滑动窗口算法的核心思想</li>
+<li>学会根据场景选择合适的数据结构</li>
+<li>熟悉 Java 中自增自减运算符的妙用</li>
+<li>提升代码优化的意识</li>
+</ul>
+<p>通过这道题，我们可以深刻理解滑动窗口算法在实际问题中的应用，并为解决类似的子数组&#x2F;子串问题打下坚实基础。</p>
 
         
       </div>
@@ -406,22 +621,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2025/05/22/hello-world/"
-      title="Hello World"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        Hello World
         
     </p>
   </a>
-  <a class="article-nav-btn right  disabled "
+  <a class="article-nav-btn right "
+    
+      href="/2025/10/20/LeetCode-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/"
+      title="LeetCode 209 - 长度最小的子数组（Minimum Size Subarray Sum）"
      >
 
     <p class="title-text">
+      
+        LeetCode 209 - 长度最小的子数组（Minimum Size Subarray Sum）
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
